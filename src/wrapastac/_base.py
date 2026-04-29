@@ -154,7 +154,7 @@ class _CollectionBase:
         nodata: float | int | None = None,
         resampling: str = "nearest",
         groupby: str | None = None,
-        chunks: dict[str, int | Literal["auto"]] | None = None,
+        chunks: dict[str, int | Literal["auto"]] | None = {"x": 1024, "y": 1024},
     ) -> xarray.Dataset:
         """Load STAC items into a clipped, band-renamed xarray Dataset.
 
