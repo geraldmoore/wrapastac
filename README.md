@@ -40,7 +40,7 @@ Use `Element84` as an alternative provider:
 ```python
 from wrapastac import Sentinel2, Element84
 
-s2 = Sentinel2(provider=Element84())
+s2 = Sentinel2(provider=Element84())  # or provider="element84"
 items = s2.search(geometry=geom, start="2024-06-01", end="2024-08-31", cloud_cover=20)
 ```
 
