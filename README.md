@@ -104,6 +104,57 @@ Two optional flags control reprojection behaviour for static collections:
 | `reproject_wgs84_to_utm` | `True` | Re-projects WGS84 assets to UTM for accurate metre-scale clipping |
 | `use_native_resolution` | `False` | Ignores `default_resolution` and loads at the COG's native pixel size |
 
+### Using a private endpoint
+
+If your collection lives behind a private STAC API, pass a custom `Provider` instead of a built-in string. Subclass `Provider` and implement `api_url`; everything else is optional:
+
+```python
+from wrapastac.providers._base import Provider
+
+class MyProvider(Provider):
+    @property
+    def api_url(self) -> str:
+        return "https://my-private-stac.example.com/v1"
+
+col = MyOptical(provider=MyProvider())
+```
+
+**Static API key** — return it via `headers`:
+
+```python
+class MyProvider(Provider):
+    def __init__(self, api_key: str) -> None:
+        self._api_key = api_key
+
+    @property
+    def api_url(self) -> str:
+        return "https://my-private-stac.example.com/v1"
+
+    @property
+    def headers(self) -> dict[str, str]:
+        return {"X-API-Key": self._api_key}
+
+col = MyOptical(provider=MyProvider(api_key="secret"))
+```
+
+**Dynamic bearer token** — use `modifier`, a callable that receives and returns the outgoing request:
+
+```python
+class MyProvider(Provider):
+    @property
+    def api_url(self) -> str:
+        return "https://my-private-stac.example.com/v1"
+
+    @property
+    def modifier(self):
+        def sign(request):
+            request.headers["Authorization"] = f"Bearer {fetch_token()}"
+            return request
+        return sign
+```
+
+If the endpoint supports OGC CQL2-JSON filtering, also set `use_cql2 = True` to enable server-side cloud cover and property filtering.
+
 ## Development
 
 This project uses [`just`](https://github.com/casey/just) as a command runner. Run `just` to see all 
