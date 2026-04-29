@@ -4,20 +4,6 @@
   "graph": {
     "hyperedges": [
       {
-        "id": "stac_search_load_pipeline",
-        "label": "STAC Search-to-Load Pipeline",
-        "nodes": [
-          "staccollection_class",
-          "search_method_stac",
-          "itemcollection_class",
-          "load_method"
-        ],
-        "relation": "participate_in",
-        "confidence": "EXTRACTED",
-        "confidence_score": 0.95,
-        "source_file": "src/wrapastac/_base.py"
-      },
-      {
         "id": "geometry_utm_projection_flow",
         "label": "Geometry UTM Projection Flow",
         "nodes": [
@@ -29,20 +15,6 @@
         "confidence": "EXTRACTED",
         "confidence_score": 0.95,
         "source_file": "src/wrapastac/geometry/__init__.py"
-      },
-      {
-        "id": "provider_resolution_pattern",
-        "label": "Provider Resolution Pattern",
-        "nodes": [
-          "provider_abc",
-          "element84_provider",
-          "planetarycomputer_provider",
-          "resolve_provider_func"
-        ],
-        "relation": "participate_in",
-        "confidence": "EXTRACTED",
-        "confidence_score": 0.95,
-        "source_file": "src/wrapastac/providers/__init__.py"
       },
       {
         "id": "static_lulc_lidar_collections",
@@ -72,17 +44,31 @@
         "source_file": "src/wrapastac/collections/hls.py"
       },
       {
-        "id": "cloud_filter_collections",
-        "label": "Collections implementing eo:cloud_cover query filter",
+        "id": "stac_provider_implementations",
+        "label": "STAC Provider Implementations",
         "nodes": [
-          "sentinel2_class",
-          "landsat_class",
-          "cloud_cover_filter_pattern"
+          "providers__base_provider",
+          "element84_element84",
+          "copernicus_dataspace_copernicusdataspaceecosystem"
         ],
         "relation": "implement",
         "confidence": "EXTRACTED",
-        "confidence_score": 1.0,
-        "source_file": "src/wrapastac/collections/sentinel2.py"
+        "confidence_score": 0.95,
+        "source_file": "src/wrapastac/providers/_base.py"
+      },
+      {
+        "id": "collection_hierarchy",
+        "label": "Collection Class Hierarchy",
+        "nodes": [
+          "_base_collectionbase",
+          "_base_staccollection",
+          "_base_staticstaccollection",
+          "sentinel2_sentinel2"
+        ],
+        "relation": "implement",
+        "confidence": "EXTRACTED",
+        "confidence_score": 0.95,
+        "source_file": "src/wrapastac/_base.py"
       }
     ]
   },
@@ -93,7 +79,7 @@
       "source_file": "tests/conftest.py",
       "source_location": "L1",
       "id": "tests_conftest_py",
-      "community": 0,
+      "community": 1,
       "norm_label": "conftest.py"
     },
     {
@@ -102,7 +88,7 @@
       "source_file": "tests/conftest.py",
       "source_location": "L11",
       "id": "tests_conftest_make_asset",
-      "community": 0,
+      "community": 1,
       "norm_label": "_make_asset()"
     },
     {
@@ -111,7 +97,7 @@
       "source_file": "tests/conftest.py",
       "source_location": "L18",
       "id": "tests_conftest_make_item",
-      "community": 0,
+      "community": 1,
       "norm_label": "make_item()"
     },
     {
@@ -120,7 +106,7 @@
       "source_file": "tests/conftest.py",
       "source_location": "L57",
       "id": "tests_conftest_s2_mpc_item",
-      "community": 0,
+      "community": 1,
       "norm_label": "s2_mpc_item()"
     },
     {
@@ -129,7 +115,7 @@
       "source_file": "tests/conftest.py",
       "source_location": "L72",
       "id": "tests_conftest_s2_e84_item",
-      "community": 0,
+      "community": 1,
       "norm_label": "s2_e84_item()"
     },
     {
@@ -138,7 +124,7 @@
       "source_file": "tests/conftest.py",
       "source_location": "L87",
       "id": "tests_conftest_s1_item",
-      "community": 0,
+      "community": 1,
       "norm_label": "s1_item()"
     },
     {
@@ -147,7 +133,7 @@
       "source_file": "tests/conftest.py",
       "source_location": "L1",
       "id": "tests_conftest_rationale_1",
-      "community": 0,
+      "community": 1,
       "norm_label": "shared fixtures for wrapastac tests."
     },
     {
@@ -156,7 +142,7 @@
       "source_file": "tests/conftest.py",
       "source_location": "L25",
       "id": "tests_conftest_rationale_25",
-      "community": 0,
+      "community": 1,
       "norm_label": "build a minimal pystac.item for unit testing.      args:         item_id: stac i"
     },
     {
@@ -165,7 +151,7 @@
       "source_file": "tests/conftest.py",
       "source_location": "L58",
       "id": "tests_conftest_rationale_58",
-      "community": 0,
+      "community": 1,
       "norm_label": "a sentinel-2 mpc-style item where asset keys are native band names (b04, b08)."
     },
     {
@@ -174,7 +160,7 @@
       "source_file": "tests/conftest.py",
       "source_location": "L73",
       "id": "tests_conftest_rationale_73",
-      "community": 0,
+      "community": 1,
       "norm_label": "a sentinel-2 e84-style item where asset keys are common names."
     },
     {
@@ -183,7 +169,7 @@
       "source_file": "tests/conftest.py",
       "source_location": "L88",
       "id": "tests_conftest_rationale_88",
-      "community": 0,
+      "community": 1,
       "norm_label": "a sentinel-1 rtc item with no eo:bands common names."
     },
     {
@@ -192,7 +178,7 @@
       "source_file": "tests/__init__.py",
       "source_location": "L1",
       "id": "tests_init_py",
-      "community": 12,
+      "community": 11,
       "norm_label": "__init__.py"
     },
     {
@@ -201,7 +187,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L1",
       "id": "tests_test_items_py",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_items.py"
     },
     {
@@ -210,7 +196,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L12",
       "id": "tests_test_items_collection",
-      "community": 0,
+      "community": 1,
       "norm_label": "_collection()"
     },
     {
@@ -219,7 +205,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L16",
       "id": "tests_test_items_test_len",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_len()"
     },
     {
@@ -228,7 +214,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L21",
       "id": "tests_test_items_test_iter",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_iter()"
     },
     {
@@ -237,7 +223,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L27",
       "id": "tests_test_items_test_getitem",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_getitem()"
     },
     {
@@ -246,7 +232,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L34",
       "id": "tests_test_items_test_repr",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_repr()"
     },
     {
@@ -255,7 +241,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L39",
       "id": "tests_test_items_test_dates",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_dates()"
     },
     {
@@ -264,7 +250,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L48",
       "id": "tests_test_items_test_cloud_cover",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_cloud_cover()"
     },
     {
@@ -273,7 +259,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L58",
       "id": "tests_test_items_test_to_dataframe",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_to_dataframe()"
     },
     {
@@ -282,7 +268,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L66",
       "id": "tests_test_items_test_filter_cloud_cover",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_filter_cloud_cover()"
     },
     {
@@ -291,7 +277,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L78",
       "id": "tests_test_items_test_filter_before",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_filter_before()"
     },
     {
@@ -300,7 +286,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L89",
       "id": "tests_test_items_test_filter_after",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_filter_after()"
     },
     {
@@ -309,7 +295,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L100",
       "id": "tests_test_items_test_filter_chaining",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_filter_chaining()"
     },
     {
@@ -318,7 +304,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L112",
       "id": "tests_test_items_test_assert_non_empty_raises_on_empty",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_assert_non_empty_raises_on_empty()"
     },
     {
@@ -327,7 +313,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L118",
       "id": "tests_test_items_test_assert_non_empty_passes_on_non_empty",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_assert_non_empty_passes_on_non_empty()"
     },
     {
@@ -336,7 +322,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L123",
       "id": "tests_test_items_test_large_result_warning",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_large_result_warning()"
     },
     {
@@ -345,7 +331,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L132",
       "id": "tests_test_items_test_no_warning_under_threshold",
-      "community": 0,
+      "community": 1,
       "norm_label": "test_no_warning_under_threshold()"
     },
     {
@@ -354,7 +340,7 @@
       "source_file": "tests/test_items.py",
       "source_location": "L1",
       "id": "tests_test_items_rationale_1",
-      "community": 0,
+      "community": 1,
       "norm_label": "tests for itemcollection wrapper."
     },
     {
@@ -363,7 +349,7 @@
       "source_file": "tests/test_wrapastac.py",
       "source_location": "L1",
       "id": "tests_test_wrapastac_py",
-      "community": 7,
+      "community": 2,
       "norm_label": "test_wrapastac.py"
     },
     {
@@ -372,7 +358,7 @@
       "source_file": "tests/test_wrapastac.py",
       "source_location": "L6",
       "id": "tests_test_wrapastac_test_top_level_imports",
-      "community": 7,
+      "community": 2,
       "norm_label": "test_top_level_imports()"
     },
     {
@@ -381,7 +367,7 @@
       "source_file": "tests/test_wrapastac.py",
       "source_location": "L27",
       "id": "tests_test_wrapastac_test_geometry_subpackage_imports",
-      "community": 7,
+      "community": 2,
       "norm_label": "test_geometry_subpackage_imports()"
     },
     {
@@ -390,7 +376,7 @@
       "source_file": "tests/test_wrapastac.py",
       "source_location": "L36",
       "id": "tests_test_wrapastac_test_providers_subpackage_imports",
-      "community": 7,
+      "community": 2,
       "norm_label": "test_providers_subpackage_imports()"
     },
     {
@@ -399,7 +385,7 @@
       "source_file": "tests/test_wrapastac.py",
       "source_location": "L1",
       "id": "tests_test_wrapastac_rationale_1",
-      "community": 7,
+      "community": 2,
       "norm_label": "tests for the top-level wrapastac package imports."
     },
     {
@@ -408,7 +394,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L1",
       "id": "tests_test_collections_py",
-      "community": 2,
+      "community": 0,
       "norm_label": "test_collections.py"
     },
     {
@@ -417,7 +403,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L24",
       "id": "tests_test_collections_test_sentinel2_element84",
-      "community": 2,
+      "community": 0,
       "norm_label": "test_sentinel2_element84()"
     },
     {
@@ -426,7 +412,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L30",
       "id": "tests_test_collections_test_sentinel2_planetary_computer",
-      "community": 2,
+      "community": 0,
       "norm_label": "test_sentinel2_planetary_computer()"
     },
     {
@@ -435,7 +421,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L35",
       "id": "tests_test_collections_test_sentinel1_planetary_computer",
-      "community": 2,
+      "community": 0,
       "norm_label": "test_sentinel1_planetary_computer()"
     },
     {
@@ -444,7 +430,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L41",
       "id": "tests_test_collections_test_landsat_planetary_computer",
-      "community": 2,
+      "community": 0,
       "norm_label": "test_landsat_planetary_computer()"
     },
     {
@@ -453,7 +439,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L47",
       "id": "tests_test_collections_test_hls_landsat",
-      "community": 2,
+      "community": 0,
       "norm_label": "test_hls_landsat()"
     },
     {
@@ -462,7 +448,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L53",
       "id": "tests_test_collections_test_hls_sentinel",
-      "community": 2,
+      "community": 0,
       "norm_label": "test_hls_sentinel()"
     },
     {
@@ -471,7 +457,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L58",
       "id": "tests_test_collections_test_copdem30_planetary_computer",
-      "community": 6,
+      "community": 3,
       "norm_label": "test_copdem30_planetary_computer()"
     },
     {
@@ -480,7 +466,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L65",
       "id": "tests_test_collections_test_esrilulc_planetary_computer",
-      "community": 6,
+      "community": 0,
       "norm_label": "test_esrilulc_planetary_computer()"
     },
     {
@@ -489,7 +475,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L70",
       "id": "tests_test_collections_test_rzlulc_planetary_computer",
-      "community": 6,
+      "community": 3,
       "norm_label": "test_rzlulc_planetary_computer()"
     },
     {
@@ -498,7 +484,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L80",
       "id": "tests_test_collections_test_optical_collections_are_stac_collections",
-      "community": 2,
+      "community": 0,
       "norm_label": "test_optical_collections_are_stac_collections()"
     },
     {
@@ -507,7 +493,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L85",
       "id": "tests_test_collections_test_static_collections_are_static_stac_collections",
-      "community": 2,
+      "community": 0,
       "norm_label": "test_static_collections_are_static_stac_collections()"
     },
     {
@@ -516,7 +502,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L95",
       "id": "tests_test_collections_test_sentinel2_builds_cloud_query",
-      "community": 2,
+      "community": 0,
       "norm_label": "test_sentinel2_builds_cloud_query()"
     },
     {
@@ -525,7 +511,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L101",
       "id": "tests_test_collections_test_sentinel2_no_cloud_query_when_none",
-      "community": 2,
+      "community": 0,
       "norm_label": "test_sentinel2_no_cloud_query_when_none()"
     },
     {
@@ -534,7 +520,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L106",
       "id": "tests_test_collections_test_sentinel1_no_cloud_query",
-      "community": 2,
+      "community": 0,
       "norm_label": "test_sentinel1_no_cloud_query()"
     },
     {
@@ -543,7 +529,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L116",
       "id": "tests_test_collections_test_custom_stac_collection",
-      "community": 2,
+      "community": 0,
       "norm_label": "test_custom_stac_collection()"
     },
     {
@@ -552,7 +538,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L129",
       "id": "tests_test_collections_test_custom_static_collection",
-      "community": 2,
+      "community": 0,
       "norm_label": "test_custom_static_collection()"
     },
     {
@@ -561,7 +547,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L142",
       "id": "tests_test_collections_test_custom_provider",
-      "community": 6,
+      "community": 3,
       "norm_label": "test_custom_provider()"
     },
     {
@@ -570,7 +556,7 @@
       "source_file": "tests/test_collections.py",
       "source_location": "L1",
       "id": "tests_test_collections_rationale_1",
-      "community": 2,
+      "community": 0,
       "norm_label": "tests for built-in collection classes."
     },
     {
@@ -579,7 +565,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L1",
       "id": "tests_test_base_py",
-      "community": 1,
+      "community": 5,
       "norm_label": "test_base.py"
     },
     {
@@ -588,7 +574,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L18",
       "id": "tests_test_base_testcollection",
-      "community": 1,
+      "community": 5,
       "norm_label": "_testcollection"
     },
     {
@@ -597,7 +583,7 @@
       "source_file": "",
       "source_location": "",
       "id": "staccollection",
-      "community": 2,
+      "community": 0,
       "norm_label": "staccollection"
     },
     {
@@ -606,7 +592,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L26",
       "id": "tests_test_base_teststaticcollection",
-      "community": 6,
+      "community": 3,
       "norm_label": "_teststaticcollection"
     },
     {
@@ -615,7 +601,7 @@
       "source_file": "",
       "source_location": "",
       "id": "staticstaccollection",
-      "community": 6,
+      "community": 3,
       "norm_label": "staticstaccollection"
     },
     {
@@ -624,7 +610,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L40",
       "id": "tests_test_base_test_provider_string_element84",
-      "community": 1,
+      "community": 5,
       "norm_label": "test_provider_string_element84()"
     },
     {
@@ -633,7 +619,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L45",
       "id": "tests_test_base_test_provider_string_planetary_computer",
-      "community": 1,
+      "community": 5,
       "norm_label": "test_provider_string_planetary_computer()"
     },
     {
@@ -642,7 +628,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L50",
       "id": "tests_test_base_test_provider_instance_passed_directly",
-      "community": 1,
+      "community": 5,
       "norm_label": "test_provider_instance_passed_directly()"
     },
     {
@@ -651,7 +637,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L56",
       "id": "tests_test_base_test_unknown_provider_string_raises",
-      "community": 1,
+      "community": 5,
       "norm_label": "test_unknown_provider_string_raises()"
     },
     {
@@ -660,7 +646,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L66",
       "id": "tests_test_base_test_missing_collection_id_raises",
-      "community": 1,
+      "community": 5,
       "norm_label": "test_missing_collection_id_raises()"
     },
     {
@@ -669,7 +655,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L78",
       "id": "tests_test_base_test_missing_default_bands_raises",
-      "community": 1,
+      "community": 5,
       "norm_label": "test_missing_default_bands_raises()"
     },
     {
@@ -678,7 +664,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L95",
       "id": "tests_test_base_test_resolve_bands_mpc_style",
-      "community": 1,
+      "community": 5,
       "norm_label": "test_resolve_bands_mpc_style()"
     },
     {
@@ -687,7 +673,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L104",
       "id": "tests_test_base_test_resolve_bands_e84_style",
-      "community": 1,
+      "community": 5,
       "norm_label": "test_resolve_bands_e84_style()"
     },
     {
@@ -696,7 +682,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L113",
       "id": "tests_test_base_test_resolve_bands_fallback_mapping",
-      "community": 2,
+      "community": 5,
       "norm_label": "test_resolve_bands_fallback_mapping()"
     },
     {
@@ -705,7 +691,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L124",
       "id": "tests_test_base_test_resolve_bands_unknown_falls_back_to_name",
-      "community": 1,
+      "community": 5,
       "norm_label": "test_resolve_bands_unknown_falls_back_to_name()"
     },
     {
@@ -714,7 +700,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L138",
       "id": "tests_test_base_test_get_epsg_from_proj_epsg",
-      "community": 1,
+      "community": 5,
       "norm_label": "test_get_epsg_from_proj_epsg()"
     },
     {
@@ -723,7 +709,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L144",
       "id": "tests_test_base_test_get_epsg_most_common",
-      "community": 1,
+      "community": 5,
       "norm_label": "test_get_epsg_most_common()"
     },
     {
@@ -732,7 +718,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L154",
       "id": "tests_test_base_test_get_epsg_defaults_to_wgs84_when_missing",
-      "community": 1,
+      "community": 5,
       "norm_label": "test_get_epsg_defaults_to_wgs84_when_missing()"
     },
     {
@@ -741,7 +727,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L168",
       "id": "tests_test_base_test_load_raises_on_empty_items",
-      "community": 1,
+      "community": 5,
       "norm_label": "test_load_raises_on_empty_items()"
     },
     {
@@ -750,7 +736,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L1",
       "id": "tests_test_base_rationale_1",
-      "community": 1,
+      "community": 3,
       "norm_label": "tests for staccollection and staticstaccollection base classes."
     },
     {
@@ -759,7 +745,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L96",
       "id": "tests_test_base_rationale_96",
-      "community": 1,
+      "community": 3,
       "norm_label": "mpc-style items have native asset keys (b04) mapped via eo:bands common_name."
     },
     {
@@ -768,7 +754,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L105",
       "id": "tests_test_base_rationale_105",
-      "community": 1,
+      "community": 3,
       "norm_label": "e84-style items already use common names as asset keys \u2014 no rename needed."
     },
     {
@@ -777,7 +763,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L114",
       "id": "tests_test_base_rationale_114",
-      "community": 2,
+      "community": 3,
       "norm_label": "sar items have no eo:bands metadata \u2014 fallback to collection _fallback_band_mapp"
     },
     {
@@ -786,7 +772,7 @@
       "source_file": "tests/test_base.py",
       "source_location": "L125",
       "id": "tests_test_base_rationale_125",
-      "community": 1,
+      "community": 3,
       "norm_label": "unknown band name falls back to itself (pass-through to odc-stac)."
     },
     {
@@ -795,7 +781,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L1",
       "id": "tests_test_geometry_py",
-      "community": 3,
+      "community": 4,
       "norm_label": "test_geometry.py"
     },
     {
@@ -804,7 +790,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L11",
       "id": "tests_test_geometry_test_point_to_bbox_returns_polygon",
-      "community": 3,
+      "community": 4,
       "norm_label": "test_point_to_bbox_returns_polygon()"
     },
     {
@@ -813,7 +799,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L16",
       "id": "tests_test_geometry_test_point_to_bbox_contains_origin",
-      "community": 3,
+      "community": 4,
       "norm_label": "test_point_to_bbox_contains_origin()"
     },
     {
@@ -822,7 +808,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L22",
       "id": "tests_test_geometry_test_point_to_bbox_approximate_size",
-      "community": 3,
+      "community": 4,
       "norm_label": "test_point_to_bbox_approximate_size()"
     },
     {
@@ -831,7 +817,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L33",
       "id": "tests_test_geometry_test_point_to_circle_returns_polygon",
-      "community": 3,
+      "community": 4,
       "norm_label": "test_point_to_circle_returns_polygon()"
     },
     {
@@ -840,7 +826,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L38",
       "id": "tests_test_geometry_test_point_to_circle_contains_origin",
-      "community": 3,
+      "community": 4,
       "norm_label": "test_point_to_circle_contains_origin()"
     },
     {
@@ -849,7 +835,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L44",
       "id": "tests_test_geometry_test_point_to_circle_is_rounder_than_bbox",
-      "community": 3,
+      "community": 4,
       "norm_label": "test_point_to_circle_is_rounder_than_bbox()"
     },
     {
@@ -858,7 +844,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L52",
       "id": "tests_test_geometry_test_bbox_helper",
-      "community": 3,
+      "community": 4,
       "norm_label": "test_bbox_helper()"
     },
     {
@@ -867,7 +853,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L58",
       "id": "tests_test_geometry_test_point_to_bbox_southern_hemisphere",
-      "community": 3,
+      "community": 4,
       "norm_label": "test_point_to_bbox_southern_hemisphere()"
     },
     {
@@ -876,7 +862,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L64",
       "id": "tests_test_geometry_test_get_utm_epsg_northern",
-      "community": 3,
+      "community": 4,
       "norm_label": "test_get_utm_epsg_northern()"
     },
     {
@@ -885,7 +871,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L69",
       "id": "tests_test_geometry_test_get_utm_epsg_southern",
-      "community": 3,
+      "community": 4,
       "norm_label": "test_get_utm_epsg_southern()"
     },
     {
@@ -894,7 +880,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L74",
       "id": "tests_test_geometry_test_get_utm_epsg_norway_special_zone",
-      "community": 3,
+      "community": 4,
       "norm_label": "test_get_utm_epsg_norway_special_zone()"
     },
     {
@@ -903,7 +889,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L1",
       "id": "tests_test_geometry_rationale_1",
-      "community": 3,
+      "community": 4,
       "norm_label": "tests for geometry utility functions."
     },
     {
@@ -912,7 +898,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L23",
       "id": "tests_test_geometry_rationale_23",
-      "community": 3,
+      "community": 4,
       "norm_label": "a 1000 m buffer should produce a bbox roughly 2 km across in degrees."
     },
     {
@@ -921,7 +907,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L45",
       "id": "tests_test_geometry_rationale_45",
-      "community": 3,
+      "community": 4,
       "norm_label": "circle should have more vertices than a square bbox of the same buffer."
     },
     {
@@ -930,7 +916,7 @@
       "source_file": "tests/test_geometry.py",
       "source_location": "L59",
       "id": "tests_test_geometry_rationale_59",
-      "community": 3,
+      "community": 4,
       "norm_label": "utm zone detection should work correctly in the southern hemisphere."
     },
     {
@@ -939,187 +925,205 @@
       "source_file": "src/wrapastac/_base.py",
       "source_location": "L1",
       "id": "src_wrapastac_base_py",
-      "community": 1,
+      "community": 0,
       "norm_label": "_base.py"
+    },
+    {
+      "label": "_query_to_cql2()",
+      "file_type": "code",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "L36",
+      "id": "wrapastac_base_query_to_cql2",
+      "community": 0,
+      "norm_label": "_query_to_cql2()"
     },
     {
       "label": "_CollectionBase",
       "file_type": "code",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L35",
+      "source_location": "L58",
       "id": "wrapastac_base_collectionbase",
-      "community": 4,
+      "community": 0,
       "norm_label": "_collectionbase"
     },
     {
       "label": ".__init__()",
       "file_type": "code",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L49",
+      "source_location": "L72",
       "id": "wrapastac_base_collectionbase_init",
-      "community": 1,
+      "community": 2,
       "norm_label": ".__init__()"
     },
     {
       "label": "._open_client()",
       "file_type": "code",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L58",
+      "source_location": "L81",
       "id": "wrapastac_base_collectionbase_open_client",
-      "community": 4,
+      "community": 0,
       "norm_label": "._open_client()"
     },
     {
       "label": "._paginate()",
       "file_type": "code",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L66",
+      "source_location": "L93",
       "id": "wrapastac_base_collectionbase_paginate",
-      "community": 4,
+      "community": 0,
       "norm_label": "._paginate()"
     },
     {
       "label": "._build_query()",
       "file_type": "code",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L72",
+      "source_location": "L99",
       "id": "wrapastac_base_collectionbase_build_query",
-      "community": 4,
+      "community": 0,
       "norm_label": "._build_query()"
     },
     {
       "label": "._maybe_harmonise()",
       "file_type": "code",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L75",
+      "source_location": "L102",
       "id": "wrapastac_base_collectionbase_maybe_harmonise",
-      "community": 4,
+      "community": 5,
       "norm_label": "._maybe_harmonise()"
     },
     {
       "label": "._resolve_bands()",
       "file_type": "code",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L78",
+      "source_location": "L105",
       "id": "wrapastac_base_collectionbase_resolve_bands",
-      "community": 4,
+      "community": 5,
       "norm_label": "._resolve_bands()"
     },
     {
       "label": "_get_epsg()",
       "file_type": "code",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L110",
+      "source_location": "L137",
       "id": "wrapastac_base_get_epsg",
-      "community": 1,
+      "community": 5,
       "norm_label": "_get_epsg()"
     },
     {
       "label": ".load()",
       "file_type": "code",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L120",
+      "source_location": "L147",
       "id": "wrapastac_base_collectionbase_load",
-      "community": 4,
+      "community": 5,
       "norm_label": ".load()"
     },
     {
       "label": "STACCollection",
       "file_type": "code",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L207",
+      "source_location": "L238",
       "id": "wrapastac_base_staccollection",
-      "community": 2,
+      "community": 0,
       "norm_label": "staccollection"
     },
     {
       "label": ".search()",
       "file_type": "code",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L226",
+      "source_location": "L257",
       "id": "wrapastac_base_staccollection_search",
-      "community": 4,
+      "community": 0,
       "norm_label": ".search()"
     },
     {
       "label": "StaticSTACCollection",
       "file_type": "code",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L259",
+      "source_location": "L298",
       "id": "wrapastac_base_staticstaccollection",
-      "community": 6,
+      "community": 3,
       "norm_label": "staticstaccollection"
     },
     {
       "label": ".search()",
       "file_type": "code",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L273",
+      "source_location": "L312",
       "id": "wrapastac_base_staticstaccollection_search",
-      "community": 4,
+      "community": 0,
       "norm_label": ".search()"
+    },
+    {
+      "label": "Convert a legacy STAC query dict to a CQL2-JSON filter expression.      ``{\"eo:c",
+      "file_type": "rationale",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "L37",
+      "id": "wrapastac_base_rationale_37",
+      "community": 0,
+      "norm_label": "convert a legacy stac query dict to a cql2-json filter expression.      ``{\"eo:c"
     },
     {
       "label": "Shared internals for STACCollection and StaticSTACCollection.",
       "file_type": "rationale",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L36",
-      "id": "wrapastac_base_rationale_36",
-      "community": 4,
+      "source_location": "L59",
+      "id": "wrapastac_base_rationale_59",
+      "community": 0,
       "norm_label": "shared internals for staccollection and staticstaccollection."
     },
     {
       "label": "Map common band names to provider asset keys using eo:bands metadata.          R",
       "file_type": "rationale",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L81",
-      "id": "wrapastac_base_rationale_81",
-      "community": 4,
+      "source_location": "L108",
+      "id": "wrapastac_base_rationale_108",
+      "community": 5,
       "norm_label": "map common band names to provider asset keys using eo:bands metadata.          r"
     },
     {
       "label": "Load STAC items into a clipped, band-renamed xarray Dataset.          Args:",
       "file_type": "rationale",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L131",
-      "id": "wrapastac_base_rationale_131",
-      "community": 4,
+      "source_location": "L159",
+      "id": "wrapastac_base_rationale_159",
+      "community": 5,
       "norm_label": "load stac items into a clipped, band-renamed xarray dataset.          args:"
     },
     {
       "label": "Base class for time-varying STAC collections (optical, SAR, etc.).      Subclass",
       "file_type": "rationale",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L208",
-      "id": "wrapastac_base_rationale_208",
-      "community": 2,
+      "source_location": "L239",
+      "id": "wrapastac_base_rationale_239",
+      "community": 0,
       "norm_label": "base class for time-varying stac collections (optical, sar, etc.).      subclass"
     },
     {
       "label": "Search the STAC catalogue for items intersecting a geometry and date range.",
       "file_type": "rationale",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L233",
-      "id": "wrapastac_base_rationale_233",
-      "community": 4,
+      "source_location": "L264",
+      "id": "wrapastac_base_rationale_264",
+      "community": 0,
       "norm_label": "search the stac catalogue for items intersecting a geometry and date range."
     },
     {
       "label": "Base class for static STAC collections with no time dimension (DEMs, LULC, etc.)",
       "file_type": "rationale",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L260",
-      "id": "wrapastac_base_rationale_260",
-      "community": 6,
+      "source_location": "L299",
+      "id": "wrapastac_base_rationale_299",
+      "community": 3,
       "norm_label": "base class for static stac collections with no time dimension (dems, lulc, etc.)"
     },
     {
       "label": "Search the STAC catalogue for items intersecting a geometry.          Args:",
       "file_type": "rationale",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L274",
-      "id": "wrapastac_base_rationale_274",
-      "community": 4,
+      "source_location": "L313",
+      "id": "wrapastac_base_rationale_313",
+      "community": 0,
       "norm_label": "search the stac catalogue for items intersecting a geometry.          args:"
     },
     {
@@ -1128,7 +1132,7 @@
       "source_file": "src/wrapastac/_crs.py",
       "source_location": "L1",
       "id": "src_wrapastac_crs_py",
-      "community": 3,
+      "community": 4,
       "norm_label": "_crs.py"
     },
     {
@@ -1137,7 +1141,7 @@
       "source_file": "src/wrapastac/_crs.py",
       "source_location": "L14",
       "id": "wrapastac_crs_get_transformer",
-      "community": 3,
+      "community": 4,
       "norm_label": "_get_transformer()"
     },
     {
@@ -1146,7 +1150,7 @@
       "source_file": "src/wrapastac/_crs.py",
       "source_location": "L20",
       "id": "wrapastac_crs_geometry_from_epsg_to_epsg",
-      "community": 3,
+      "community": 4,
       "norm_label": "geometry_from_epsg_to_epsg()"
     },
     {
@@ -1155,7 +1159,7 @@
       "source_file": "src/wrapastac/_crs.py",
       "source_location": "L28",
       "id": "wrapastac_crs_get_utm_epsg",
-      "community": 3,
+      "community": 4,
       "norm_label": "get_utm_epsg()"
     },
     {
@@ -1164,7 +1168,7 @@
       "source_file": "src/wrapastac/_crs.py",
       "source_location": "L21",
       "id": "wrapastac_crs_rationale_21",
-      "community": 3,
+      "community": 4,
       "norm_label": "reproject a shapely geometry from one epsg to another."
     },
     {
@@ -1173,7 +1177,7 @@
       "source_file": "src/wrapastac/_crs.py",
       "source_location": "L29",
       "id": "wrapastac_crs_rationale_29",
-      "community": 3,
+      "community": 4,
       "norm_label": "return the utm epsg code for a given longitude/latitude, including norwegian spe"
     },
     {
@@ -1182,7 +1186,7 @@
       "source_file": "src/wrapastac/__init__.py",
       "source_location": "L1",
       "id": "src_wrapastac_init_py",
-      "community": 1,
+      "community": 3,
       "norm_label": "__init__.py"
     },
     {
@@ -1191,7 +1195,7 @@
       "source_file": "src/wrapastac/__init__.py",
       "source_location": "L1",
       "id": "wrapastac_init_rationale_1",
-      "community": 1,
+      "community": 3,
       "norm_label": "wrapastac \u2014 a simple, professional wrapper around public stac catalogues.  typic"
     },
     {
@@ -1200,7 +1204,7 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L1",
       "id": "src_wrapastac_items_py",
-      "community": 0,
+      "community": 1,
       "norm_label": "_items.py"
     },
     {
@@ -1209,7 +1213,7 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L18",
       "id": "wrapastac_items_itemcollection",
-      "community": 0,
+      "community": 1,
       "norm_label": "itemcollection"
     },
     {
@@ -1218,7 +1222,7 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L25",
       "id": "wrapastac_items_itemcollection_init",
-      "community": 0,
+      "community": 1,
       "norm_label": ".__init__()"
     },
     {
@@ -1227,7 +1231,7 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L38",
       "id": "wrapastac_items_itemcollection_len",
-      "community": 0,
+      "community": 1,
       "norm_label": ".__len__()"
     },
     {
@@ -1236,7 +1240,7 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L41",
       "id": "wrapastac_items_itemcollection_iter",
-      "community": 0,
+      "community": 1,
       "norm_label": ".__iter__()"
     },
     {
@@ -1245,7 +1249,7 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L44",
       "id": "wrapastac_items_itemcollection_getitem",
-      "community": 0,
+      "community": 1,
       "norm_label": ".__getitem__()"
     },
     {
@@ -1254,7 +1258,7 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L47",
       "id": "wrapastac_items_itemcollection_repr",
-      "community": 0,
+      "community": 1,
       "norm_label": ".__repr__()"
     },
     {
@@ -1263,7 +1267,7 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L51",
       "id": "wrapastac_items_dates",
-      "community": 0,
+      "community": 1,
       "norm_label": "dates()"
     },
     {
@@ -1272,7 +1276,7 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L59",
       "id": "wrapastac_items_cloud_cover",
-      "community": 0,
+      "community": 1,
       "norm_label": "cloud_cover()"
     },
     {
@@ -1281,7 +1285,7 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L63",
       "id": "wrapastac_items_itemcollection_to_dataframe",
-      "community": 0,
+      "community": 1,
       "norm_label": ".to_dataframe()"
     },
     {
@@ -1290,26 +1294,53 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L77",
       "id": "wrapastac_items_itemcollection_filter",
-      "community": 0,
+      "community": 1,
       "norm_label": ".filter()"
+    },
+    {
+      "label": ".sort_by_cloud_cover()",
+      "file_type": "code",
+      "source_file": "src/wrapastac/_items.py",
+      "source_location": "L124",
+      "id": "wrapastac_items_itemcollection_sort_by_cloud_cover",
+      "community": 1,
+      "norm_label": ".sort_by_cloud_cover()"
+    },
+    {
+      "label": ".unique_dates()",
+      "file_type": "code",
+      "source_file": "src/wrapastac/_items.py",
+      "source_location": "L139",
+      "id": "wrapastac_items_itemcollection_unique_dates",
+      "community": 1,
+      "norm_label": ".unique_dates()"
     },
     {
       "label": "._assert_non_empty()",
       "file_type": "code",
       "source_file": "src/wrapastac/_items.py",
-      "source_location": "L117",
+      "source_location": "L166",
       "id": "wrapastac_items_itemcollection_assert_non_empty",
-      "community": 0,
+      "community": 1,
       "norm_label": "._assert_non_empty()"
     },
     {
       "label": "_parse_dt()",
       "file_type": "code",
       "source_file": "src/wrapastac/_items.py",
-      "source_location": "L125",
+      "source_location": "L174",
       "id": "wrapastac_items_parse_dt",
-      "community": 0,
+      "community": 1,
       "norm_label": "_parse_dt()"
+    },
+    {
+      "label": "_matches_tile()",
+      "file_type": "code",
+      "source_file": "src/wrapastac/_items.py",
+      "source_location": "L180",
+      "id": "wrapastac_items_matches_tile",
+      "community": 1,
+      "norm_label": "_matches_tile()"
     },
     {
       "label": "A searchable, filterable collection of STAC items returned by .search().      Wr",
@@ -1317,7 +1348,7 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L19",
       "id": "wrapastac_items_rationale_19",
-      "community": 1,
+      "community": 3,
       "norm_label": "a searchable, filterable collection of stac items returned by .search().      wr"
     },
     {
@@ -1326,7 +1357,7 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L52",
       "id": "wrapastac_items_rationale_52",
-      "community": 1,
+      "community": 3,
       "norm_label": "acquisition dates as yyyy-mm-dd strings, sorted ascending."
     },
     {
@@ -1335,7 +1366,7 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L60",
       "id": "wrapastac_items_rationale_60",
-      "community": 1,
+      "community": 3,
       "norm_label": "cloud cover percentage for each item, or none if not available."
     },
     {
@@ -1344,17 +1375,35 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L64",
       "id": "wrapastac_items_rationale_64",
-      "community": 1,
+      "community": 3,
       "norm_label": "summarise the collection as a dataframe with id, date, cloud_cover, collection."
     },
     {
       "label": "Return a new ItemCollection with items matching all given criteria.          Arg",
       "file_type": "rationale",
       "source_file": "src/wrapastac/_items.py",
-      "source_location": "L83",
-      "id": "wrapastac_items_rationale_83",
-      "community": 1,
+      "source_location": "L84",
+      "id": "wrapastac_items_rationale_84",
+      "community": 3,
       "norm_label": "return a new itemcollection with items matching all given criteria.          arg"
+    },
+    {
+      "label": "Return a new ItemCollection sorted by ascending cloud cover.          Items with",
+      "file_type": "rationale",
+      "source_file": "src/wrapastac/_items.py",
+      "source_location": "L125",
+      "id": "wrapastac_items_rationale_125",
+      "community": 1,
+      "norm_label": "return a new itemcollection sorted by ascending cloud cover.          items with"
+    },
+    {
+      "label": "Return one item per calendar date, keeping the least cloudy item for each date.",
+      "file_type": "rationale",
+      "source_file": "src/wrapastac/_items.py",
+      "source_location": "L140",
+      "id": "wrapastac_items_rationale_140",
+      "community": 1,
+      "norm_label": "return one item per calendar date, keeping the least cloudy item for each date."
     },
     {
       "label": "exceptions.py",
@@ -1362,7 +1411,7 @@
       "source_file": "src/wrapastac/exceptions.py",
       "source_location": "L1",
       "id": "src_wrapastac_exceptions_py",
-      "community": 1,
+      "community": 3,
       "norm_label": "exceptions.py"
     },
     {
@@ -1371,7 +1420,7 @@
       "source_file": "src/wrapastac/exceptions.py",
       "source_location": "L4",
       "id": "wrapastac_exceptions_emptyitemcollectionerror",
-      "community": 1,
+      "community": 3,
       "norm_label": "emptyitemcollectionerror"
     },
     {
@@ -1380,7 +1429,7 @@
       "source_file": "",
       "source_location": "",
       "id": "valueerror",
-      "community": 1,
+      "community": 3,
       "norm_label": "valueerror"
     },
     {
@@ -1389,7 +1438,7 @@
       "source_file": "src/wrapastac/exceptions.py",
       "source_location": "L8",
       "id": "wrapastac_exceptions_unknownprovidererror",
-      "community": 1,
+      "community": 3,
       "norm_label": "unknownprovidererror"
     },
     {
@@ -1398,7 +1447,7 @@
       "source_file": "src/wrapastac/exceptions.py",
       "source_location": "L5",
       "id": "wrapastac_exceptions_rationale_5",
-      "community": 1,
+      "community": 3,
       "norm_label": "raised when .load() is called on an itemcollection with no items."
     },
     {
@@ -1407,7 +1456,7 @@
       "source_file": "src/wrapastac/exceptions.py",
       "source_location": "L9",
       "id": "wrapastac_exceptions_rationale_9",
-      "community": 1,
+      "community": 3,
       "norm_label": "raised when a provider string cannot be resolved to a known provider."
     },
     {
@@ -1416,7 +1465,7 @@
       "source_file": "src/wrapastac/_harmonise.py",
       "source_location": "L1",
       "id": "src_wrapastac_harmonise_py",
-      "community": 2,
+      "community": 0,
       "norm_label": "_harmonise.py"
     },
     {
@@ -1425,7 +1474,7 @@
       "source_file": "src/wrapastac/_harmonise.py",
       "source_location": "L19",
       "id": "wrapastac_harmonise_maybe_harmonise_s2",
-      "community": 2,
+      "community": 0,
       "norm_label": "maybe_harmonise_s2()"
     },
     {
@@ -1434,7 +1483,7 @@
       "source_file": "src/wrapastac/_harmonise.py",
       "source_location": "L20",
       "id": "wrapastac_harmonise_rationale_20",
-      "community": 2,
+      "community": 0,
       "norm_label": "apply s2 processing baseline harmonisation when items span the 2022-01-25 cutoff"
     },
     {
@@ -1443,7 +1492,7 @@
       "source_file": "src/wrapastac/providers/_base.py",
       "source_location": "L1",
       "id": "src_wrapastac_providers_base_py",
-      "community": 4,
+      "community": 2,
       "norm_label": "_base.py"
     },
     {
@@ -1452,7 +1501,7 @@
       "source_file": "src/wrapastac/providers/_base.py",
       "source_location": "L7",
       "id": "providers_base_provider",
-      "community": 4,
+      "community": 2,
       "norm_label": "provider"
     },
     {
@@ -1461,7 +1510,7 @@
       "source_file": "",
       "source_location": "",
       "id": "abc",
-      "community": 4,
+      "community": 2,
       "norm_label": "abc"
     },
     {
@@ -1470,7 +1519,7 @@
       "source_file": "src/wrapastac/providers/_base.py",
       "source_location": "L17",
       "id": "providers_base_api_url",
-      "community": 4,
+      "community": 2,
       "norm_label": "api_url()"
     },
     {
@@ -1479,7 +1528,7 @@
       "source_file": "src/wrapastac/providers/_base.py",
       "source_location": "L21",
       "id": "providers_base_modifier",
-      "community": 4,
+      "community": 2,
       "norm_label": "modifier()"
     },
     {
@@ -1488,16 +1537,25 @@
       "source_file": "src/wrapastac/providers/_base.py",
       "source_location": "L26",
       "id": "providers_base_headers",
-      "community": 4,
+      "community": 2,
       "norm_label": "headers()"
+    },
+    {
+      "label": "use_cql2()",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/_base.py",
+      "source_location": "L31",
+      "id": "providers_base_use_cql2",
+      "community": 2,
+      "norm_label": "use_cql2()"
     },
     {
       "label": ".__repr__()",
       "file_type": "code",
       "source_file": "src/wrapastac/providers/_base.py",
-      "source_location": "L30",
+      "source_location": "L40",
       "id": "providers_base_provider_repr",
-      "community": 4,
+      "community": 2,
       "norm_label": ".__repr__()"
     },
     {
@@ -1506,7 +1564,7 @@
       "source_file": "src/wrapastac/providers/_base.py",
       "source_location": "L8",
       "id": "providers_base_rationale_8",
-      "community": 4,
+      "community": 2,
       "norm_label": "abstract base class representing a stac api provider.      a provider knows two"
     },
     {
@@ -1515,7 +1573,7 @@
       "source_file": "src/wrapastac/providers/_base.py",
       "source_location": "L18",
       "id": "providers_base_rationale_18",
-      "community": 13,
+      "community": 12,
       "norm_label": "the root url of the stac api."
     },
     {
@@ -1524,7 +1582,7 @@
       "source_file": "src/wrapastac/providers/_base.py",
       "source_location": "L22",
       "id": "providers_base_rationale_22",
-      "community": 14,
+      "community": 13,
       "norm_label": "optional callable passed to pystac_client.client.open() to sign/modify requests."
     },
     {
@@ -1533,8 +1591,125 @@
       "source_file": "src/wrapastac/providers/_base.py",
       "source_location": "L27",
       "id": "providers_base_rationale_27",
-      "community": 15,
+      "community": 14,
       "norm_label": "optional http headers to include with every request."
+    },
+    {
+      "label": "Whether this provider prefers CQL2-JSON for STAC query filters.          When Tr",
+      "file_type": "rationale",
+      "source_file": "src/wrapastac/providers/_base.py",
+      "source_location": "L32",
+      "id": "providers_base_rationale_32",
+      "community": 15,
+      "norm_label": "whether this provider prefers cql2-json for stac query filters.          when tr"
+    },
+    {
+      "label": "copernicus_dataspace.py",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L1",
+      "id": "src_wrapastac_providers_copernicus_dataspace_py",
+      "community": 2,
+      "norm_label": "copernicus_dataspace.py"
+    },
+    {
+      "label": "CopernicusDataSpaceEcosystem",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L12",
+      "id": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "community": 2,
+      "norm_label": "copernicusdataspaceecosystem"
+    },
+    {
+      "label": "Provider",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "provider",
+      "community": 2,
+      "norm_label": "provider"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L24",
+      "id": "providers_copernicus_dataspace_copernicusdataspaceecosystem_init",
+      "community": 3,
+      "norm_label": ".__init__()"
+    },
+    {
+      "label": "api_url()",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L41",
+      "id": "providers_copernicus_dataspace_api_url",
+      "community": 2,
+      "norm_label": "api_url()"
+    },
+    {
+      "label": "use_cql2()",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L45",
+      "id": "providers_copernicus_dataspace_use_cql2",
+      "community": 2,
+      "norm_label": "use_cql2()"
+    },
+    {
+      "label": "._get_token()",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L48",
+      "id": "providers_copernicus_dataspace_copernicusdataspaceecosystem_get_token",
+      "community": 2,
+      "norm_label": "._get_token()"
+    },
+    {
+      "label": "._make_modifier()",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L66",
+      "id": "providers_copernicus_dataspace_copernicusdataspaceecosystem_make_modifier",
+      "community": 2,
+      "norm_label": "._make_modifier()"
+    },
+    {
+      "label": "modifier()",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L77",
+      "id": "providers_copernicus_dataspace_modifier",
+      "community": 2,
+      "norm_label": "modifier()"
+    },
+    {
+      "label": "Copernicus Data Space Ecosystem STAC API (https://stac.dataspace.copernicus.eu).",
+      "file_type": "rationale",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L13",
+      "id": "providers_copernicus_dataspace_rationale_13",
+      "community": 2,
+      "norm_label": "copernicus data space ecosystem stac api (https://stac.dataspace.copernicus.eu)."
+    },
+    {
+      "label": "Fetch or return cached OAuth2 token.",
+      "file_type": "rationale",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L49",
+      "id": "providers_copernicus_dataspace_rationale_49",
+      "community": 2,
+      "norm_label": "fetch or return cached oauth2 token."
+    },
+    {
+      "label": "Return a callable that injects the Bearer token into requests.",
+      "file_type": "rationale",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L67",
+      "id": "providers_copernicus_dataspace_rationale_67",
+      "community": 2,
+      "norm_label": "return a callable that injects the bearer token into requests."
     },
     {
       "label": "__init__.py",
@@ -1542,25 +1717,43 @@
       "source_file": "src/wrapastac/providers/__init__.py",
       "source_location": "L1",
       "id": "src_wrapastac_providers_init_py",
-      "community": 1,
+      "community": 2,
       "norm_label": "__init__.py"
+    },
+    {
+      "label": "get_cdse_provider()",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "L15",
+      "id": "providers_init_get_cdse_provider",
+      "community": 2,
+      "norm_label": "get_cdse_provider()"
     },
     {
       "label": "resolve_provider()",
       "file_type": "code",
       "source_file": "src/wrapastac/providers/__init__.py",
-      "source_location": "L14",
+      "source_location": "L31",
       "id": "providers_init_resolve_provider",
-      "community": 1,
+      "community": 2,
       "norm_label": "resolve_provider()"
+    },
+    {
+      "label": "Create a Copernicus Data Space Ecosystem provider with OAuth2 credentials.",
+      "file_type": "rationale",
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "L19",
+      "id": "providers_init_rationale_19",
+      "community": 2,
+      "norm_label": "create a copernicus data space ecosystem provider with oauth2 credentials."
     },
     {
       "label": "Resolve a provider name string or Provider instance to a Provider object.      A",
       "file_type": "rationale",
       "source_file": "src/wrapastac/providers/__init__.py",
-      "source_location": "L15",
-      "id": "providers_init_rationale_15",
-      "community": 1,
+      "source_location": "L32",
+      "id": "providers_init_rationale_32",
+      "community": 2,
       "norm_label": "resolve a provider name string or provider instance to a provider object.      a"
     },
     {
@@ -1569,7 +1762,7 @@
       "source_file": "src/wrapastac/providers/element84.py",
       "source_location": "L1",
       "id": "src_wrapastac_providers_element84_py",
-      "community": 7,
+      "community": 2,
       "norm_label": "element84.py"
     },
     {
@@ -1578,17 +1771,8 @@
       "source_file": "src/wrapastac/providers/element84.py",
       "source_location": "L6",
       "id": "providers_element84_element84",
-      "community": 7,
+      "community": 2,
       "norm_label": "element84"
-    },
-    {
-      "label": "Provider",
-      "file_type": "code",
-      "source_file": "",
-      "source_location": "",
-      "id": "provider",
-      "community": 7,
-      "norm_label": "provider"
     },
     {
       "label": "api_url()",
@@ -1596,8 +1780,17 @@
       "source_file": "src/wrapastac/providers/element84.py",
       "source_location": "L13",
       "id": "providers_element84_api_url",
-      "community": 7,
+      "community": 2,
       "norm_label": "api_url()"
+    },
+    {
+      "label": "use_cql2()",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/element84.py",
+      "source_location": "L17",
+      "id": "providers_element84_use_cql2",
+      "community": 2,
+      "norm_label": "use_cql2()"
     },
     {
       "label": "Element84 Earth Search STAC API (https://earth-search.aws.element84.com/v1).",
@@ -1605,7 +1798,7 @@
       "source_file": "src/wrapastac/providers/element84.py",
       "source_location": "L7",
       "id": "providers_element84_rationale_7",
-      "community": 7,
+      "community": 2,
       "norm_label": "element84 earth search stac api (https://earth-search.aws.element84.com/v1)."
     },
     {
@@ -1614,7 +1807,7 @@
       "source_file": "src/wrapastac/providers/planetary_computer.py",
       "source_location": "L1",
       "id": "src_wrapastac_providers_planetary_computer_py",
-      "community": 7,
+      "community": 2,
       "norm_label": "planetary_computer.py"
     },
     {
@@ -1623,7 +1816,7 @@
       "source_file": "src/wrapastac/providers/planetary_computer.py",
       "source_location": "L8",
       "id": "providers_planetary_computer_planetarycomputer",
-      "community": 7,
+      "community": 2,
       "norm_label": "planetarycomputer"
     },
     {
@@ -1632,7 +1825,7 @@
       "source_file": "src/wrapastac/providers/planetary_computer.py",
       "source_location": "L16",
       "id": "providers_planetary_computer_api_url",
-      "community": 7,
+      "community": 2,
       "norm_label": "api_url()"
     },
     {
@@ -1641,7 +1834,7 @@
       "source_file": "src/wrapastac/providers/planetary_computer.py",
       "source_location": "L20",
       "id": "providers_planetary_computer_modifier",
-      "community": 7,
+      "community": 2,
       "norm_label": "modifier()"
     },
     {
@@ -1650,7 +1843,7 @@
       "source_file": "src/wrapastac/providers/planetary_computer.py",
       "source_location": "L9",
       "id": "providers_planetary_computer_rationale_9",
-      "community": 7,
+      "community": 2,
       "norm_label": "microsoft planetary computer stac api.      assets are access-controlled. items"
     },
     {
@@ -1659,7 +1852,7 @@
       "source_file": "src/wrapastac/geometry/__init__.py",
       "source_location": "L1",
       "id": "src_wrapastac_geometry_init_py",
-      "community": 3,
+      "community": 4,
       "norm_label": "__init__.py"
     },
     {
@@ -1668,7 +1861,7 @@
       "source_file": "src/wrapastac/geometry/__init__.py",
       "source_location": "L20",
       "id": "geometry_init_point_to_bbox",
-      "community": 3,
+      "community": 4,
       "norm_label": "point_to_bbox()"
     },
     {
@@ -1677,7 +1870,7 @@
       "source_file": "src/wrapastac/geometry/__init__.py",
       "source_location": "L45",
       "id": "geometry_init_point_to_circle",
-      "community": 3,
+      "community": 4,
       "norm_label": "point_to_circle()"
     },
     {
@@ -1686,7 +1879,7 @@
       "source_file": "src/wrapastac/geometry/__init__.py",
       "source_location": "L66",
       "id": "geometry_init_from_geodataframe",
-      "community": 1,
+      "community": 4,
       "norm_label": "from_geodataframe()"
     },
     {
@@ -1695,7 +1888,7 @@
       "source_file": "src/wrapastac/geometry/__init__.py",
       "source_location": "L97",
       "id": "geometry_init_bbox",
-      "community": 3,
+      "community": 4,
       "norm_label": "bbox()"
     },
     {
@@ -1704,7 +1897,7 @@
       "source_file": "src/wrapastac/geometry/__init__.py",
       "source_location": "L1",
       "id": "geometry_init_rationale_1",
-      "community": 3,
+      "community": 4,
       "norm_label": "geometry utility functions for constructing search and clip geometries.  all fun"
     },
     {
@@ -1713,7 +1906,7 @@
       "source_file": "src/wrapastac/geometry/__init__.py",
       "source_location": "L21",
       "id": "geometry_init_rationale_21",
-      "community": 3,
+      "community": 4,
       "norm_label": "create a square bounding box around a lat/lon point.      the point is projected"
     },
     {
@@ -1722,7 +1915,7 @@
       "source_file": "src/wrapastac/geometry/__init__.py",
       "source_location": "L46",
       "id": "geometry_init_rationale_46",
-      "community": 3,
+      "community": 4,
       "norm_label": "create a circular polygon around a lat/lon point.      the point is projected to"
     },
     {
@@ -1731,7 +1924,7 @@
       "source_file": "src/wrapastac/geometry/__init__.py",
       "source_location": "L67",
       "id": "geometry_init_rationale_67",
-      "community": 1,
+      "community": 4,
       "norm_label": "return the union of all geometries in a geodataframe as a single wgs84 geometry."
     },
     {
@@ -1740,7 +1933,7 @@
       "source_file": "src/wrapastac/geometry/__init__.py",
       "source_location": "L103",
       "id": "geometry_init_rationale_103",
-      "community": 3,
+      "community": 4,
       "norm_label": "construct a rectangular bounding box geometry from wgs84 coordinates.      args:"
     },
     {
@@ -1749,7 +1942,7 @@
       "source_file": "src/wrapastac/collections/dem.py",
       "source_location": "L1",
       "id": "src_wrapastac_collections_dem_py",
-      "community": 6,
+      "community": 3,
       "norm_label": "dem.py"
     },
     {
@@ -1758,7 +1951,7 @@
       "source_file": "src/wrapastac/collections/dem.py",
       "source_location": "L8",
       "id": "collections_dem_copdem30",
-      "community": 6,
+      "community": 3,
       "norm_label": "copdem30"
     },
     {
@@ -1767,7 +1960,7 @@
       "source_file": "src/wrapastac/collections/dem.py",
       "source_location": "L9",
       "id": "collections_dem_rationale_9",
-      "community": 6,
+      "community": 3,
       "norm_label": "copernicus digital elevation model at 30 m resolution (glo-30).      supported p"
     },
     {
@@ -1776,7 +1969,7 @@
       "source_file": "src/wrapastac/collections/sentinel1.py",
       "source_location": "L1",
       "id": "src_wrapastac_collections_sentinel1_py",
-      "community": 2,
+      "community": 0,
       "norm_label": "sentinel1.py"
     },
     {
@@ -1785,7 +1978,7 @@
       "source_file": "src/wrapastac/collections/sentinel1.py",
       "source_location": "L8",
       "id": "collections_sentinel1_sentinel1",
-      "community": 2,
+      "community": 0,
       "norm_label": "sentinel1"
     },
     {
@@ -1794,7 +1987,7 @@
       "source_file": "src/wrapastac/collections/sentinel1.py",
       "source_location": "L9",
       "id": "collections_sentinel1_rationale_9",
-      "community": 2,
+      "community": 0,
       "norm_label": "sentinel-1 rtc (radiometric terrain corrected) sar backscatter.      supported p"
     },
     {
@@ -1803,7 +1996,7 @@
       "source_file": "src/wrapastac/collections/lulc.py",
       "source_location": "L1",
       "id": "src_wrapastac_collections_lulc_py",
-      "community": 6,
+      "community": 3,
       "norm_label": "lulc.py"
     },
     {
@@ -1812,7 +2005,7 @@
       "source_file": "src/wrapastac/collections/lulc.py",
       "source_location": "L8",
       "id": "collections_lulc_esrilulc",
-      "community": 6,
+      "community": 3,
       "norm_label": "esrilulc"
     },
     {
@@ -1821,7 +2014,7 @@
       "source_file": "src/wrapastac/collections/lulc.py",
       "source_location": "L24",
       "id": "collections_lulc_rzlulc",
-      "community": 6,
+      "community": 3,
       "norm_label": "rzlulc"
     },
     {
@@ -1830,7 +2023,7 @@
       "source_file": "src/wrapastac/collections/lulc.py",
       "source_location": "L9",
       "id": "collections_lulc_rationale_9",
-      "community": 6,
+      "community": 3,
       "norm_label": "esri 10 m annual land use / land cover (2017\u20132023).      supported providers: \"p"
     },
     {
@@ -1839,7 +2032,7 @@
       "source_file": "src/wrapastac/collections/lulc.py",
       "source_location": "L25",
       "id": "collections_lulc_rationale_25",
-      "community": 6,
+      "community": 3,
       "norm_label": "riparian zone land use / land cover (io-lulc-riparian-zones).      supported pro"
     },
     {
@@ -1848,7 +2041,7 @@
       "source_file": "src/wrapastac/collections/hls.py",
       "source_location": "L1",
       "id": "src_wrapastac_collections_hls_py",
-      "community": 2,
+      "community": 0,
       "norm_label": "hls.py"
     },
     {
@@ -1857,7 +2050,7 @@
       "source_file": "src/wrapastac/collections/hls.py",
       "source_location": "L8",
       "id": "collections_hls_hlslandsat",
-      "community": 2,
+      "community": 0,
       "norm_label": "hlslandsat"
     },
     {
@@ -1866,7 +2059,7 @@
       "source_file": "src/wrapastac/collections/hls.py",
       "source_location": "L39",
       "id": "collections_hls_hlssentinel",
-      "community": 2,
+      "community": 0,
       "norm_label": "hlssentinel"
     },
     {
@@ -1875,7 +2068,7 @@
       "source_file": "src/wrapastac/collections/hls.py",
       "source_location": "L9",
       "id": "collections_hls_rationale_9",
-      "community": 2,
+      "community": 0,
       "norm_label": "nasa harmonized landsat sentinel-2 (hls) \u2014 landsat component.      supported pro"
     },
     {
@@ -1884,7 +2077,7 @@
       "source_file": "src/wrapastac/collections/hls.py",
       "source_location": "L40",
       "id": "collections_hls_rationale_40",
-      "community": 2,
+      "community": 0,
       "norm_label": "nasa harmonized landsat sentinel-2 (hls) \u2014 sentinel-2 component.      supported"
     },
     {
@@ -1893,7 +2086,7 @@
       "source_file": "src/wrapastac/collections/landsat.py",
       "source_location": "L1",
       "id": "src_wrapastac_collections_landsat_py",
-      "community": 2,
+      "community": 0,
       "norm_label": "landsat.py"
     },
     {
@@ -1902,7 +2095,7 @@
       "source_file": "src/wrapastac/collections/landsat.py",
       "source_location": "L8",
       "id": "collections_landsat_landsat",
-      "community": 2,
+      "community": 0,
       "norm_label": "landsat"
     },
     {
@@ -1911,7 +2104,7 @@
       "source_file": "src/wrapastac/collections/landsat.py",
       "source_location": "L23",
       "id": "collections_landsat_landsat_build_query",
-      "community": 2,
+      "community": 0,
       "norm_label": "._build_query()"
     },
     {
@@ -1920,7 +2113,7 @@
       "source_file": "src/wrapastac/collections/landsat.py",
       "source_location": "L9",
       "id": "collections_landsat_rationale_9",
-      "community": 2,
+      "community": 0,
       "norm_label": "landsat collection 2 level-2 surface reflectance and surface temperature.      s"
     },
     {
@@ -1938,7 +2131,7 @@
       "source_file": "src/wrapastac/collections/sentinel2.py",
       "source_location": "L1",
       "id": "src_wrapastac_collections_sentinel2_py",
-      "community": 2,
+      "community": 0,
       "norm_label": "sentinel2.py"
     },
     {
@@ -1947,25 +2140,25 @@
       "source_file": "src/wrapastac/collections/sentinel2.py",
       "source_location": "L12",
       "id": "collections_sentinel2_sentinel2",
-      "community": 2,
+      "community": 0,
       "norm_label": "sentinel2"
     },
     {
       "label": "._build_query()",
       "file_type": "code",
       "source_file": "src/wrapastac/collections/sentinel2.py",
-      "source_location": "L28",
+      "source_location": "L29",
       "id": "collections_sentinel2_sentinel2_build_query",
-      "community": 2,
+      "community": 0,
       "norm_label": "._build_query()"
     },
     {
       "label": "._maybe_harmonise()",
       "file_type": "code",
       "source_file": "src/wrapastac/collections/sentinel2.py",
-      "source_location": "L33",
+      "source_location": "L34",
       "id": "collections_sentinel2_sentinel2_maybe_harmonise",
-      "community": 2,
+      "community": 0,
       "norm_label": "._maybe_harmonise()"
     },
     {
@@ -1974,7 +2167,7 @@
       "source_file": "src/wrapastac/collections/sentinel2.py",
       "source_location": "L13",
       "id": "collections_sentinel2_rationale_13",
-      "community": 2,
+      "community": 0,
       "norm_label": "sentinel-2 l2a surface reflectance.      supported providers: \"element84\", \"plan"
     },
     {
@@ -1983,7 +2176,7 @@
       "source_file": "src/wrapastac/collections/lidar.py",
       "source_location": "L1",
       "id": "src_wrapastac_collections_lidar_py",
-      "community": 6,
+      "community": 3,
       "norm_label": "lidar.py"
     },
     {
@@ -1992,7 +2185,7 @@
       "source_file": "src/wrapastac/collections/lidar.py",
       "source_location": "L8",
       "id": "collections_lidar_lidarengland",
-      "community": 6,
+      "community": 3,
       "norm_label": "lidarengland"
     },
     {
@@ -2001,151 +2194,86 @@
       "source_file": "src/wrapastac/collections/lidar.py",
       "source_location": "L9",
       "id": "collections_lidar_rationale_9",
-      "community": 6,
+      "community": 3,
       "norm_label": "5 m lidar digital terrain model for england.      this collection requires a cus"
     },
     {
-      "label": "_CollectionBase",
+      "label": "make_item() fixture helper",
       "file_type": "code",
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 35",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "collectionbase_class",
-      "community": 5,
-      "norm_label": "_collectionbase"
-    },
-    {
-      "label": "STACCollection",
-      "file_type": "code",
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 207",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "staccollection_class",
-      "community": 5,
-      "norm_label": "staccollection"
-    },
-    {
-      "label": "StaticSTACCollection",
-      "file_type": "code",
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 259",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "staticstaccollection_class",
-      "community": 5,
-      "norm_label": "staticstaccollection"
-    },
-    {
-      "label": "ItemCollection",
-      "file_type": "code",
-      "source_file": "src/wrapastac/_items.py",
+      "source_file": "tests/conftest.py",
       "source_location": "line 18",
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "itemcollection_class",
-      "community": 5,
-      "norm_label": "itemcollection"
+      "id": "conftest_make_item",
+      "community": 8,
+      "norm_label": "make_item() fixture helper"
     },
     {
-      "label": "Provider (ABC)",
+      "label": "test_items.py",
       "file_type": "code",
-      "source_file": "src/wrapastac/providers/_base.py",
-      "source_location": "line 7",
+      "source_file": "tests/test_items.py",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "provider_abc",
-      "community": 5,
-      "norm_label": "provider (abc)"
+      "id": "test_items_module",
+      "community": 8,
+      "norm_label": "test_items.py"
     },
     {
-      "label": "Element84 Provider",
+      "label": "test_wrapastac.py",
       "file_type": "code",
-      "source_file": "src/wrapastac/providers/element84.py",
-      "source_location": "line 6",
+      "source_file": "tests/test_wrapastac.py",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "element84_provider",
-      "community": 5,
-      "norm_label": "element84 provider"
+      "id": "test_wrapastac_module",
+      "community": 17,
+      "norm_label": "test_wrapastac.py"
     },
     {
-      "label": "PlanetaryComputer Provider",
+      "label": "test_collections.py",
       "file_type": "code",
-      "source_file": "src/wrapastac/providers/planetary_computer.py",
-      "source_location": "line 8",
+      "source_file": "tests/test_collections.py",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "planetarycomputer_provider",
-      "community": 5,
-      "norm_label": "planetarycomputer provider"
+      "id": "test_collections_module",
+      "community": 8,
+      "norm_label": "test_collections.py"
     },
     {
-      "label": "resolve_provider()",
+      "label": "test_base.py",
       "file_type": "code",
-      "source_file": "src/wrapastac/providers/__init__.py",
-      "source_location": "line 14",
+      "source_file": "tests/test_base.py",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "resolve_provider_func",
-      "community": 5,
-      "norm_label": "resolve_provider()"
+      "id": "test_base_module",
+      "community": 8,
+      "norm_label": "test_base.py"
     },
     {
-      "label": "EmptyItemCollectionError",
+      "label": "test_geometry.py",
       "file_type": "code",
-      "source_file": "src/wrapastac/exceptions.py",
-      "source_location": "line 4",
+      "source_file": "tests/test_geometry.py",
+      "source_location": null,
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "emptyitemcollectionerror",
-      "community": 5,
-      "norm_label": "emptyitemcollectionerror"
-    },
-    {
-      "label": "UnknownProviderError",
-      "file_type": "code",
-      "source_file": "src/wrapastac/exceptions.py",
-      "source_location": "line 8",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "unknownprovidererror",
-      "community": 5,
-      "norm_label": "unknownprovidererror"
-    },
-    {
-      "label": "maybe_harmonise_s2()",
-      "file_type": "code",
-      "source_file": "src/wrapastac/_harmonise.py",
-      "source_location": "line 19",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "maybe_harmonise_s2_func",
+      "id": "test_geometry_module",
       "community": 9,
-      "norm_label": "maybe_harmonise_s2()"
+      "norm_label": "test_geometry.py"
     },
     {
       "label": "get_utm_epsg()",
@@ -2187,6 +2315,71 @@
       "norm_label": "wgs84_epsg constant"
     },
     {
+      "label": "wrapastac package __init__",
+      "file_type": "code",
+      "source_file": "src/wrapastac/__init__.py",
+      "source_location": "line 1",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "wrapastac_init",
+      "community": 8,
+      "norm_label": "wrapastac package __init__"
+    },
+    {
+      "label": "EmptyItemCollectionError",
+      "file_type": "code",
+      "source_file": "src/wrapastac/exceptions.py",
+      "source_location": "line 4",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "emptyitemcollectionerror",
+      "community": 8,
+      "norm_label": "emptyitemcollectionerror"
+    },
+    {
+      "label": "UnknownProviderError",
+      "file_type": "code",
+      "source_file": "src/wrapastac/exceptions.py",
+      "source_location": "line 8",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "unknownprovidererror",
+      "community": 8,
+      "norm_label": "unknownprovidererror"
+    },
+    {
+      "label": "maybe_harmonise_s2()",
+      "file_type": "code",
+      "source_file": "src/wrapastac/_harmonise.py",
+      "source_location": "line 19",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "maybe_harmonise_s2_func",
+      "community": 18,
+      "norm_label": "maybe_harmonise_s2()"
+    },
+    {
+      "label": "PlanetaryComputer Provider",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/planetary_computer.py",
+      "source_location": "line 8",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "planetarycomputer_provider",
+      "community": 19,
+      "norm_label": "planetarycomputer provider"
+    },
+    {
       "label": "point_to_bbox()",
       "file_type": "code",
       "source_file": "src/wrapastac/geometry/__init__.py",
@@ -2222,7 +2415,7 @@
       "author": null,
       "contributor": null,
       "id": "from_geodataframe_func",
-      "community": 17,
+      "community": 20,
       "norm_label": "from_geodataframe()"
     },
     {
@@ -2239,19 +2432,6 @@
       "norm_label": "bbox()"
     },
     {
-      "label": "Sentinel1",
-      "file_type": "code",
-      "source_file": "src/wrapastac/collections/sentinel1.py",
-      "source_location": "line 8",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "sentinel1_class",
-      "community": 5,
-      "norm_label": "sentinel1"
-    },
-    {
       "label": "CopDEM30",
       "file_type": "code",
       "source_file": "src/wrapastac/collections/dem.py",
@@ -2261,203 +2441,21 @@
       "author": null,
       "contributor": null,
       "id": "copdem30_class",
-      "community": 5,
+      "community": 8,
       "norm_label": "copdem30"
     },
     {
-      "label": "wrapastac package __init__",
+      "label": "Sentinel1",
       "file_type": "code",
-      "source_file": "src/wrapastac/__init__.py",
-      "source_location": "line 1",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "wrapastac_init",
-      "community": 5,
-      "norm_label": "wrapastac package __init__"
-    },
-    {
-      "label": "make_item() fixture helper",
-      "file_type": "code",
-      "source_file": "tests/conftest.py",
-      "source_location": "line 18",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "conftest_make_item",
-      "community": 5,
-      "norm_label": "make_item() fixture helper"
-    },
-    {
-      "label": "test_items.py",
-      "file_type": "code",
-      "source_file": "tests/test_items.py",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "test_items_module",
-      "community": 5,
-      "norm_label": "test_items.py"
-    },
-    {
-      "label": "test_base.py",
-      "file_type": "code",
-      "source_file": "tests/test_base.py",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "test_base_module",
-      "community": 5,
-      "norm_label": "test_base.py"
-    },
-    {
-      "label": "test_collections.py",
-      "file_type": "code",
-      "source_file": "tests/test_collections.py",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "test_collections_module",
-      "community": 5,
-      "norm_label": "test_collections.py"
-    },
-    {
-      "label": "test_geometry.py",
-      "file_type": "code",
-      "source_file": "tests/test_geometry.py",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "test_geometry_module",
-      "community": 9,
-      "norm_label": "test_geometry.py"
-    },
-    {
-      "label": "test_wrapastac.py",
-      "file_type": "code",
-      "source_file": "tests/test_wrapastac.py",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "test_wrapastac_module",
-      "community": 18,
-      "norm_label": "test_wrapastac.py"
-    },
-    {
-      "label": "_CollectionBase.load()",
-      "file_type": "code",
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 120",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "load_method",
-      "community": 9,
-      "norm_label": "_collectionbase.load()"
-    },
-    {
-      "label": "STACCollection.search()",
-      "file_type": "code",
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 226",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "search_method_stac",
-      "community": 5,
-      "norm_label": "staccollection.search()"
-    },
-    {
-      "label": "StaticSTACCollection.search()",
-      "file_type": "code",
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 273",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "search_method_static",
-      "community": 5,
-      "norm_label": "staticstaccollection.search()"
-    },
-    {
-      "label": "_CollectionBase._resolve_bands()",
-      "file_type": "code",
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 78",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "resolve_bands_method",
-      "community": 9,
-      "norm_label": "_collectionbase._resolve_bands()"
-    },
-    {
-      "label": "_CollectionBase._get_epsg()",
-      "file_type": "code",
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 110",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "get_epsg_method",
-      "community": 9,
-      "norm_label": "_collectionbase._get_epsg()"
-    },
-    {
-      "label": "ItemCollection._assert_non_empty()",
-      "file_type": "code",
-      "source_file": "src/wrapastac/_items.py",
-      "source_location": "line 117",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "assert_non_empty_method",
-      "community": 5,
-      "norm_label": "itemcollection._assert_non_empty()"
-    },
-    {
-      "label": "ItemCollection.filter()",
-      "file_type": "code",
-      "source_file": "src/wrapastac/_items.py",
-      "source_location": "line 77",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "filter_method",
-      "community": 5,
-      "norm_label": "itemcollection.filter()"
-    },
-    {
-      "label": "Provider Registry (_REGISTRY)",
-      "file_type": "code",
-      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_file": "src/wrapastac/collections/sentinel1.py",
       "source_location": "line 8",
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "provider_registry",
-      "community": 5,
-      "norm_label": "provider registry (_registry)"
+      "id": "sentinel1_class",
+      "community": 8,
+      "norm_label": "sentinel1"
     },
     {
       "label": "ESRILULC",
@@ -2469,7 +2467,7 @@
       "author": null,
       "contributor": null,
       "id": "esrilulc_class",
-      "community": 8,
+      "community": 7,
       "norm_label": "esrilulc"
     },
     {
@@ -2482,8 +2480,34 @@
       "author": null,
       "contributor": null,
       "id": "rzlulc_class",
-      "community": 8,
+      "community": 7,
       "norm_label": "rzlulc"
+    },
+    {
+      "label": "_fallback_band_mapping pattern (common_name -> asset_key)",
+      "file_type": "code",
+      "source_file": "src/wrapastac/collections/lulc.py",
+      "source_location": "line 21",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "fallback_band_mapping_pattern",
+      "community": 7,
+      "norm_label": "_fallback_band_mapping pattern (common_name -> asset_key)"
+    },
+    {
+      "label": "Microsoft Planetary Computer STAC provider",
+      "file_type": "code",
+      "source_file": "src/wrapastac/collections/lulc.py",
+      "source_location": "line 13",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "planetary_computer_provider",
+      "community": 7,
+      "norm_label": "microsoft planetary computer stac provider"
     },
     {
       "label": "HLSLandsat",
@@ -2495,7 +2519,7 @@
       "author": null,
       "contributor": null,
       "id": "hlslandsat_class",
-      "community": 8,
+      "community": 7,
       "norm_label": "hlslandsat"
     },
     {
@@ -2508,138 +2532,8 @@
       "author": null,
       "contributor": null,
       "id": "hlssentinel_class",
-      "community": 8,
+      "community": 7,
       "norm_label": "hlssentinel"
-    },
-    {
-      "label": "Landsat",
-      "file_type": "code",
-      "source_file": "src/wrapastac/collections/landsat.py",
-      "source_location": "line 8",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "landsat_class",
-      "community": 8,
-      "norm_label": "landsat"
-    },
-    {
-      "label": "Sentinel2",
-      "file_type": "code",
-      "source_file": "src/wrapastac/collections/sentinel2.py",
-      "source_location": "line 12",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "sentinel2_class",
-      "community": 8,
-      "norm_label": "sentinel2"
-    },
-    {
-      "label": "LidarEngland",
-      "file_type": "code",
-      "source_file": "src/wrapastac/collections/lidar.py",
-      "source_location": "line 8",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "lidarengland_class",
-      "community": 8,
-      "norm_label": "lidarengland"
-    },
-    {
-      "label": "collections __init__ (public API surface)",
-      "file_type": "code",
-      "source_file": "src/wrapastac/collections/__init__.py",
-      "source_location": "line 1",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "collections_init",
-      "community": 8,
-      "norm_label": "collections __init__ (public api surface)"
-    },
-    {
-      "label": "StaticSTACCollection (base class)",
-      "file_type": "code",
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "staticstaccollection_base",
-      "community": 8,
-      "norm_label": "staticstaccollection (base class)"
-    },
-    {
-      "label": "STACCollection (base class)",
-      "file_type": "code",
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "staccollection_base",
-      "community": 8,
-      "norm_label": "staccollection (base class)"
-    },
-    {
-      "label": "Sentinel2._build_query",
-      "file_type": "code",
-      "source_file": "src/wrapastac/collections/sentinel2.py",
-      "source_location": "line 28",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "sentinel2_build_query_method",
-      "community": 11,
-      "norm_label": "sentinel2._build_query"
-    },
-    {
-      "label": "Sentinel2._maybe_harmonise",
-      "file_type": "code",
-      "source_file": "src/wrapastac/collections/sentinel2.py",
-      "source_location": "line 33",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "sentinel2_maybe_harmonise_method",
-      "community": 9,
-      "norm_label": "sentinel2._maybe_harmonise"
-    },
-    {
-      "label": "Landsat._build_query",
-      "file_type": "code",
-      "source_file": "src/wrapastac/collections/landsat.py",
-      "source_location": "line 23",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "landsat_build_query_method",
-      "community": 11,
-      "norm_label": "landsat._build_query"
-    },
-    {
-      "label": "eo:cloud_cover STAC query filter pattern",
-      "file_type": "code",
-      "source_file": "src/wrapastac/collections/sentinel2.py",
-      "source_location": "line 30",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "cloud_cover_filter_pattern",
-      "community": 11,
-      "norm_label": "eo:cloud_cover stac query filter pattern"
     },
     {
       "label": "HLS MGRS tiling grid harmonisation concept",
@@ -2651,21 +2545,60 @@
       "author": null,
       "contributor": null,
       "id": "hls_harmonised_grid_concept",
-      "community": 8,
+      "community": 7,
       "norm_label": "hls mgrs tiling grid harmonisation concept"
     },
     {
-      "label": "_fallback_band_mapping pattern (common_name -> asset_key)",
+      "label": "Landsat",
       "file_type": "code",
-      "source_file": "src/wrapastac/collections/lulc.py",
-      "source_location": "line 21",
+      "source_file": "src/wrapastac/collections/landsat.py",
+      "source_location": "line 8",
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "fallback_band_mapping_pattern",
-      "community": 8,
-      "norm_label": "_fallback_band_mapping pattern (common_name -> asset_key)"
+      "id": "landsat_class",
+      "community": 7,
+      "norm_label": "landsat"
+    },
+    {
+      "label": "Landsat._build_query",
+      "file_type": "code",
+      "source_file": "src/wrapastac/collections/landsat.py",
+      "source_location": "line 23",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "landsat_build_query_method",
+      "community": 21,
+      "norm_label": "landsat._build_query"
+    },
+    {
+      "label": "collections __init__ (public API surface)",
+      "file_type": "code",
+      "source_file": "src/wrapastac/collections/__init__.py",
+      "source_location": "line 1",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "collections_init",
+      "community": 7,
+      "norm_label": "collections __init__ (public api surface)"
+    },
+    {
+      "label": "LidarEngland",
+      "file_type": "code",
+      "source_file": "src/wrapastac/collections/lidar.py",
+      "source_location": "line 8",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "lidarengland_class",
+      "community": 7,
+      "norm_label": "lidarengland"
     },
     {
       "label": "LidarEngland custom Provider injection pattern",
@@ -2677,86 +2610,203 @@
       "author": null,
       "contributor": null,
       "id": "lidarengland_custom_provider_pattern",
-      "community": 8,
+      "community": 7,
       "norm_label": "lidarengland custom provider injection pattern"
     },
     {
-      "label": "WrapASTAC README",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": null,
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "readme_doc",
-      "community": 10,
-      "norm_label": "wrapastac readme"
-    },
-    {
-      "label": "WrapASTAC \u2014 Python SDK to wrap STAC satellite endpoints",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "line 3",
-      "source_url": null,
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "wrapastac_sdk_concept",
-      "community": 10,
-      "norm_label": "wrapastac \u2014 python sdk to wrap stac satellite endpoints"
-    },
-    {
-      "label": "prek pre-commit hook manager",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "line 37",
-      "source_url": "https://prek.j178.dev/",
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "prek_tool",
-      "community": 10,
-      "norm_label": "prek pre-commit hook manager"
-    },
-    {
-      "label": "just command runner",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "line 18",
-      "source_url": "https://github.com/casey/just",
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "just_command_runner",
-      "community": 10,
-      "norm_label": "just command runner"
-    },
-    {
-      "label": "uv package manager",
-      "file_type": "document",
-      "source_file": "README.md",
-      "source_location": "line 11",
-      "source_url": "https://docs.astral.sh/uv/",
-      "captured_at": null,
-      "author": null,
-      "contributor": null,
-      "id": "uv_tool",
-      "community": 10,
-      "norm_label": "uv package manager"
-    },
-    {
-      "label": "Microsoft Planetary Computer STAC provider",
+      "label": "_CollectionBase",
       "file_type": "code",
-      "source_file": "src/wrapastac/collections/lulc.py",
-      "source_location": "line 13",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "_base.py:58",
       "source_url": null,
       "captured_at": null,
       "author": null,
       "contributor": null,
-      "id": "planetary_computer_provider",
-      "community": 8,
-      "norm_label": "microsoft planetary computer stac provider"
+      "id": "_base_collectionbase",
+      "community": 6,
+      "norm_label": "_collectionbase"
+    },
+    {
+      "label": "STACCollection",
+      "file_type": "code",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "_base.py:238",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "_base_staccollection",
+      "community": 6,
+      "norm_label": "staccollection"
+    },
+    {
+      "label": "StaticSTACCollection",
+      "file_type": "code",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "_base.py:298",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "_base_staticstaccollection",
+      "community": 6,
+      "norm_label": "staticstaccollection"
+    },
+    {
+      "label": "_query_to_cql2",
+      "file_type": "code",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "_base.py:36",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "_base_query_to_cql2",
+      "community": 6,
+      "norm_label": "_query_to_cql2"
+    },
+    {
+      "label": "ItemCollection",
+      "file_type": "code",
+      "source_file": "src/wrapastac/_items.py",
+      "source_location": "_items.py:18",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "_items_itemcollection",
+      "community": 6,
+      "norm_label": "itemcollection"
+    },
+    {
+      "label": "Provider",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/_base.py",
+      "source_location": "_base.py:7",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "providers__base_provider",
+      "community": 6,
+      "norm_label": "provider"
+    },
+    {
+      "label": "CopernicusDataSpaceEcosystem",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "copernicus_dataspace.py:12",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "copernicus_dataspace_copernicusdataspaceecosystem",
+      "community": 6,
+      "norm_label": "copernicusdataspaceecosystem"
+    },
+    {
+      "label": "Element84",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/element84.py",
+      "source_location": "element84.py:6",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "element84_element84",
+      "community": 6,
+      "norm_label": "element84"
+    },
+    {
+      "label": "resolve_provider",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "__init__.py:31",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "providers___init___resolve_provider",
+      "community": 6,
+      "norm_label": "resolve_provider"
+    },
+    {
+      "label": "get_cdse_provider",
+      "file_type": "code",
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "__init__.py:15",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "providers___init___get_cdse_provider",
+      "community": 6,
+      "norm_label": "get_cdse_provider"
+    },
+    {
+      "label": "Sentinel2",
+      "file_type": "code",
+      "source_file": "src/wrapastac/collections/sentinel2.py",
+      "source_location": "sentinel2.py:12",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "sentinel2_sentinel2",
+      "community": 6,
+      "norm_label": "sentinel2"
+    },
+    {
+      "label": "WrapASTAC SDK",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "README.md:1",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_wrapastac",
+      "community": 10,
+      "norm_label": "wrapastac sdk"
+    },
+    {
+      "label": "STAC Satellite Endpoint",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "README.md:3",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_stac_catalog",
+      "community": 10,
+      "norm_label": "stac satellite endpoint"
+    },
+    {
+      "label": "CQL2-JSON Filter",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "README.md:156",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_cql2_filter",
+      "community": 6,
+      "norm_label": "cql2-json filter"
+    },
+    {
+      "label": "Provider Pattern",
+      "file_type": "document",
+      "source_file": "README.md",
+      "source_location": "README.md:109",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "readme_provider_pattern",
+      "community": 6,
+      "norm_label": "provider pattern"
     }
   ],
   "links": [
@@ -5560,7 +5610,19 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L35",
+      "source_location": "L36",
+      "weight": 1.0,
+      "_src": "src_wrapastac_base_py",
+      "_tgt": "wrapastac_base_query_to_cql2",
+      "source": "src_wrapastac_base_py",
+      "target": "wrapastac_base_query_to_cql2",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "L58",
       "weight": 1.0,
       "_src": "src_wrapastac_base_py",
       "_tgt": "wrapastac_base_collectionbase",
@@ -5572,7 +5634,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L110",
+      "source_location": "L137",
       "weight": 1.0,
       "_src": "src_wrapastac_base_py",
       "_tgt": "wrapastac_base_get_epsg",
@@ -5584,7 +5646,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L207",
+      "source_location": "L238",
       "weight": 1.0,
       "_src": "src_wrapastac_base_py",
       "_tgt": "wrapastac_base_staccollection",
@@ -5596,7 +5658,7 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L259",
+      "source_location": "L298",
       "weight": 1.0,
       "_src": "src_wrapastac_base_py",
       "_tgt": "wrapastac_base_staticstaccollection",
@@ -5605,10 +5667,34 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "L287",
+      "weight": 1.0,
+      "_src": "wrapastac_base_staccollection_search",
+      "_tgt": "wrapastac_base_query_to_cql2",
+      "source": "wrapastac_base_query_to_cql2",
+      "target": "wrapastac_base_staccollection_search",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "L37",
+      "weight": 1.0,
+      "_src": "wrapastac_base_rationale_37",
+      "_tgt": "wrapastac_base_query_to_cql2",
+      "source": "wrapastac_base_query_to_cql2",
+      "target": "wrapastac_base_rationale_37",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L49",
+      "source_location": "L72",
       "weight": 1.0,
       "_src": "wrapastac_base_collectionbase",
       "_tgt": "wrapastac_base_collectionbase_init",
@@ -5620,7 +5706,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L58",
+      "source_location": "L81",
       "weight": 1.0,
       "_src": "wrapastac_base_collectionbase",
       "_tgt": "wrapastac_base_collectionbase_open_client",
@@ -5632,7 +5718,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L66",
+      "source_location": "L93",
       "weight": 1.0,
       "_src": "wrapastac_base_collectionbase",
       "_tgt": "wrapastac_base_collectionbase_paginate",
@@ -5644,7 +5730,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L72",
+      "source_location": "L99",
       "weight": 1.0,
       "_src": "wrapastac_base_collectionbase",
       "_tgt": "wrapastac_base_collectionbase_build_query",
@@ -5656,7 +5742,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L75",
+      "source_location": "L102",
       "weight": 1.0,
       "_src": "wrapastac_base_collectionbase",
       "_tgt": "wrapastac_base_collectionbase_maybe_harmonise",
@@ -5668,7 +5754,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L78",
+      "source_location": "L105",
       "weight": 1.0,
       "_src": "wrapastac_base_collectionbase",
       "_tgt": "wrapastac_base_collectionbase_resolve_bands",
@@ -5680,7 +5766,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L120",
+      "source_location": "L147",
       "weight": 1.0,
       "_src": "wrapastac_base_collectionbase",
       "_tgt": "wrapastac_base_collectionbase_load",
@@ -5692,7 +5778,7 @@
       "relation": "inherits",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L207",
+      "source_location": "L238",
       "weight": 1.0,
       "_src": "wrapastac_base_staccollection",
       "_tgt": "wrapastac_base_collectionbase",
@@ -5704,7 +5790,7 @@
       "relation": "inherits",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L259",
+      "source_location": "L298",
       "weight": 1.0,
       "_src": "wrapastac_base_staticstaccollection",
       "_tgt": "wrapastac_base_collectionbase",
@@ -5716,12 +5802,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L36",
+      "source_location": "L59",
       "weight": 1.0,
-      "_src": "wrapastac_base_rationale_36",
+      "_src": "wrapastac_base_rationale_59",
       "_tgt": "wrapastac_base_collectionbase",
       "source": "wrapastac_base_collectionbase",
-      "target": "wrapastac_base_rationale_36",
+      "target": "wrapastac_base_rationale_59",
       "confidence_score": 1.0
     },
     {
@@ -5753,7 +5839,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L56",
+      "source_location": "L79",
       "weight": 1.0,
       "_src": "wrapastac_base_collectionbase_init",
       "_tgt": "providers_init_resolve_provider",
@@ -5764,11 +5850,47 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L245",
+      "source_location": "L276",
       "weight": 1.0,
       "_src": "wrapastac_base_staccollection_search",
       "_tgt": "wrapastac_base_collectionbase_open_client",
       "source": "wrapastac_base_collectionbase_open_client",
+      "target": "wrapastac_base_staccollection_search",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "L321",
+      "weight": 1.0,
+      "_src": "wrapastac_base_staticstaccollection_search",
+      "_tgt": "wrapastac_base_collectionbase_open_client",
+      "source": "wrapastac_base_collectionbase_open_client",
+      "target": "wrapastac_base_staticstaccollection_search",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "L326",
+      "weight": 1.0,
+      "_src": "wrapastac_base_staticstaccollection_search",
+      "_tgt": "wrapastac_base_collectionbase_paginate",
+      "source": "wrapastac_base_collectionbase_paginate",
+      "target": "wrapastac_base_staticstaccollection_search",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "L294",
+      "weight": 1.0,
+      "_src": "wrapastac_base_staccollection_search",
+      "_tgt": "wrapastac_base_collectionbase_paginate",
+      "source": "wrapastac_base_collectionbase_paginate",
       "target": "wrapastac_base_staccollection_search",
       "confidence_score": 1.0
     },
@@ -5777,42 +5899,6 @@
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
       "source_location": "L282",
-      "weight": 1.0,
-      "_src": "wrapastac_base_staticstaccollection_search",
-      "_tgt": "wrapastac_base_collectionbase_open_client",
-      "source": "wrapastac_base_collectionbase_open_client",
-      "target": "wrapastac_base_staticstaccollection_search",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "L287",
-      "weight": 1.0,
-      "_src": "wrapastac_base_staticstaccollection_search",
-      "_tgt": "wrapastac_base_collectionbase_paginate",
-      "source": "wrapastac_base_collectionbase_paginate",
-      "target": "wrapastac_base_staticstaccollection_search",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "L255",
-      "weight": 1.0,
-      "_src": "wrapastac_base_staccollection_search",
-      "_tgt": "wrapastac_base_collectionbase_paginate",
-      "source": "wrapastac_base_collectionbase_paginate",
-      "target": "wrapastac_base_staccollection_search",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "L246",
       "weight": 1.0,
       "_src": "wrapastac_base_staccollection_search",
       "_tgt": "wrapastac_base_collectionbase_build_query",
@@ -5824,7 +5910,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L194",
+      "source_location": "L225",
       "weight": 1.0,
       "_src": "wrapastac_base_collectionbase_load",
       "_tgt": "wrapastac_base_collectionbase_maybe_harmonise",
@@ -5836,7 +5922,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L156",
+      "source_location": "L187",
       "weight": 1.0,
       "_src": "wrapastac_base_collectionbase_load",
       "_tgt": "wrapastac_base_collectionbase_resolve_bands",
@@ -5848,19 +5934,19 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L81",
+      "source_location": "L108",
       "weight": 1.0,
-      "_src": "wrapastac_base_rationale_81",
+      "_src": "wrapastac_base_rationale_108",
       "_tgt": "wrapastac_base_collectionbase_resolve_bands",
       "source": "wrapastac_base_collectionbase_resolve_bands",
-      "target": "wrapastac_base_rationale_81",
+      "target": "wrapastac_base_rationale_108",
       "confidence_score": 1.0
     },
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L158",
+      "source_location": "L189",
       "weight": 1.0,
       "_src": "wrapastac_base_collectionbase_load",
       "_tgt": "wrapastac_base_get_epsg",
@@ -5872,12 +5958,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L131",
+      "source_location": "L159",
       "weight": 1.0,
-      "_src": "wrapastac_base_rationale_131",
+      "_src": "wrapastac_base_rationale_159",
       "_tgt": "wrapastac_base_collectionbase_load",
       "source": "wrapastac_base_collectionbase_load",
-      "target": "wrapastac_base_rationale_131",
+      "target": "wrapastac_base_rationale_159",
       "confidence_score": 1.0
     },
     {
@@ -5885,7 +5971,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L147",
+      "source_location": "L178",
       "weight": 1.0,
       "_src": "wrapastac_base_collectionbase_load",
       "_tgt": "wrapastac_items_itemcollection_assert_non_empty",
@@ -5897,7 +5983,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L162",
+      "source_location": "L193",
       "weight": 1.0,
       "_src": "wrapastac_base_collectionbase_load",
       "_tgt": "wrapastac_crs_get_utm_epsg",
@@ -5909,7 +5995,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L174",
+      "source_location": "L205",
       "weight": 1.0,
       "_src": "wrapastac_base_collectionbase_load",
       "_tgt": "wrapastac_crs_geometry_from_epsg_to_epsg",
@@ -5920,7 +6006,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L226",
+      "source_location": "L257",
       "weight": 1.0,
       "_src": "wrapastac_base_staccollection",
       "_tgt": "wrapastac_base_staccollection_search",
@@ -5932,12 +6018,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L208",
+      "source_location": "L239",
       "weight": 1.0,
-      "_src": "wrapastac_base_rationale_208",
+      "_src": "wrapastac_base_rationale_239",
       "_tgt": "wrapastac_base_staccollection",
       "source": "wrapastac_base_staccollection",
-      "target": "wrapastac_base_rationale_208",
+      "target": "wrapastac_base_rationale_239",
       "confidence_score": 1.0
     },
     {
@@ -6100,12 +6186,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L233",
+      "source_location": "L264",
       "weight": 1.0,
-      "_src": "wrapastac_base_rationale_233",
+      "_src": "wrapastac_base_rationale_264",
       "_tgt": "wrapastac_base_staccollection_search",
       "source": "wrapastac_base_staccollection_search",
-      "target": "wrapastac_base_rationale_233",
+      "target": "wrapastac_base_rationale_264",
       "confidence_score": 1.0
     },
     {
@@ -6113,7 +6199,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L256",
+      "source_location": "L295",
       "weight": 1.0,
       "_src": "wrapastac_base_staccollection_search",
       "_tgt": "wrapastac_items_itemcollection",
@@ -6124,7 +6210,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L273",
+      "source_location": "L312",
       "weight": 1.0,
       "_src": "wrapastac_base_staticstaccollection",
       "_tgt": "wrapastac_base_staticstaccollection_search",
@@ -6136,12 +6222,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L260",
+      "source_location": "L299",
       "weight": 1.0,
-      "_src": "wrapastac_base_rationale_260",
+      "_src": "wrapastac_base_rationale_299",
       "_tgt": "wrapastac_base_staticstaccollection",
       "source": "wrapastac_base_staticstaccollection",
-      "target": "wrapastac_base_rationale_260",
+      "target": "wrapastac_base_rationale_299",
       "confidence_score": 1.0
     },
     {
@@ -6280,12 +6366,12 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L274",
+      "source_location": "L313",
       "weight": 1.0,
-      "_src": "wrapastac_base_rationale_274",
+      "_src": "wrapastac_base_rationale_313",
       "_tgt": "wrapastac_base_staticstaccollection_search",
       "source": "wrapastac_base_staticstaccollection_search",
-      "target": "wrapastac_base_rationale_274",
+      "target": "wrapastac_base_rationale_313",
       "confidence_score": 1.0
     },
     {
@@ -6293,7 +6379,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src/wrapastac/_base.py",
-      "source_location": "L288",
+      "source_location": "L327",
       "weight": 1.0,
       "_src": "wrapastac_base_staticstaccollection_search",
       "_tgt": "wrapastac_items_itemcollection",
@@ -6306,9 +6392,9 @@
       "source_file": "src/wrapastac/_base.py",
       "source_location": "L18",
       "weight": 0.8,
-      "_src": "wrapastac_base_rationale_36",
+      "_src": "wrapastac_base_rationale_37",
       "_tgt": "wrapastac_items_itemcollection",
-      "source": "wrapastac_base_rationale_36",
+      "source": "wrapastac_base_rationale_37",
       "target": "wrapastac_items_itemcollection",
       "confidence_score": 0.5
     },
@@ -6318,9 +6404,9 @@
       "source_file": "src/wrapastac/_base.py",
       "source_location": "L20",
       "weight": 0.8,
-      "_src": "wrapastac_base_rationale_36",
+      "_src": "wrapastac_base_rationale_37",
       "_tgt": "providers_base_provider",
-      "source": "wrapastac_base_rationale_36",
+      "source": "wrapastac_base_rationale_37",
       "target": "providers_base_provider",
       "confidence_score": 0.5
     },
@@ -6330,9 +6416,9 @@
       "source_file": "src/wrapastac/_base.py",
       "source_location": "L18",
       "weight": 0.8,
-      "_src": "wrapastac_base_rationale_81",
+      "_src": "wrapastac_base_rationale_59",
       "_tgt": "wrapastac_items_itemcollection",
-      "source": "wrapastac_base_rationale_81",
+      "source": "wrapastac_base_rationale_59",
       "target": "wrapastac_items_itemcollection",
       "confidence_score": 0.5
     },
@@ -6342,9 +6428,9 @@
       "source_file": "src/wrapastac/_base.py",
       "source_location": "L20",
       "weight": 0.8,
-      "_src": "wrapastac_base_rationale_81",
+      "_src": "wrapastac_base_rationale_59",
       "_tgt": "providers_base_provider",
-      "source": "wrapastac_base_rationale_81",
+      "source": "wrapastac_base_rationale_59",
       "target": "providers_base_provider",
       "confidence_score": 0.5
     },
@@ -6354,9 +6440,9 @@
       "source_file": "src/wrapastac/_base.py",
       "source_location": "L18",
       "weight": 0.8,
-      "_src": "wrapastac_base_rationale_131",
+      "_src": "wrapastac_base_rationale_108",
       "_tgt": "wrapastac_items_itemcollection",
-      "source": "wrapastac_base_rationale_131",
+      "source": "wrapastac_base_rationale_108",
       "target": "wrapastac_items_itemcollection",
       "confidence_score": 0.5
     },
@@ -6366,9 +6452,9 @@
       "source_file": "src/wrapastac/_base.py",
       "source_location": "L20",
       "weight": 0.8,
-      "_src": "wrapastac_base_rationale_131",
+      "_src": "wrapastac_base_rationale_108",
       "_tgt": "providers_base_provider",
-      "source": "wrapastac_base_rationale_131",
+      "source": "wrapastac_base_rationale_108",
       "target": "providers_base_provider",
       "confidence_score": 0.5
     },
@@ -6378,9 +6464,9 @@
       "source_file": "src/wrapastac/_base.py",
       "source_location": "L18",
       "weight": 0.8,
-      "_src": "wrapastac_base_rationale_208",
+      "_src": "wrapastac_base_rationale_159",
       "_tgt": "wrapastac_items_itemcollection",
-      "source": "wrapastac_base_rationale_208",
+      "source": "wrapastac_base_rationale_159",
       "target": "wrapastac_items_itemcollection",
       "confidence_score": 0.5
     },
@@ -6390,9 +6476,9 @@
       "source_file": "src/wrapastac/_base.py",
       "source_location": "L20",
       "weight": 0.8,
-      "_src": "wrapastac_base_rationale_208",
+      "_src": "wrapastac_base_rationale_159",
       "_tgt": "providers_base_provider",
-      "source": "wrapastac_base_rationale_208",
+      "source": "wrapastac_base_rationale_159",
       "target": "providers_base_provider",
       "confidence_score": 0.5
     },
@@ -6402,9 +6488,9 @@
       "source_file": "src/wrapastac/_base.py",
       "source_location": "L18",
       "weight": 0.8,
-      "_src": "wrapastac_base_rationale_233",
+      "_src": "wrapastac_base_rationale_239",
       "_tgt": "wrapastac_items_itemcollection",
-      "source": "wrapastac_base_rationale_233",
+      "source": "wrapastac_base_rationale_239",
       "target": "wrapastac_items_itemcollection",
       "confidence_score": 0.5
     },
@@ -6414,9 +6500,9 @@
       "source_file": "src/wrapastac/_base.py",
       "source_location": "L20",
       "weight": 0.8,
-      "_src": "wrapastac_base_rationale_233",
+      "_src": "wrapastac_base_rationale_239",
       "_tgt": "providers_base_provider",
-      "source": "wrapastac_base_rationale_233",
+      "source": "wrapastac_base_rationale_239",
       "target": "providers_base_provider",
       "confidence_score": 0.5
     },
@@ -6426,9 +6512,9 @@
       "source_file": "src/wrapastac/_base.py",
       "source_location": "L18",
       "weight": 0.8,
-      "_src": "wrapastac_base_rationale_274",
+      "_src": "wrapastac_base_rationale_264",
       "_tgt": "wrapastac_items_itemcollection",
-      "source": "wrapastac_base_rationale_274",
+      "source": "wrapastac_base_rationale_264",
       "target": "wrapastac_items_itemcollection",
       "confidence_score": 0.5
     },
@@ -6438,9 +6524,33 @@
       "source_file": "src/wrapastac/_base.py",
       "source_location": "L20",
       "weight": 0.8,
-      "_src": "wrapastac_base_rationale_274",
+      "_src": "wrapastac_base_rationale_264",
       "_tgt": "providers_base_provider",
-      "source": "wrapastac_base_rationale_274",
+      "source": "wrapastac_base_rationale_264",
+      "target": "providers_base_provider",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "L18",
+      "weight": 0.8,
+      "_src": "wrapastac_base_rationale_313",
+      "_tgt": "wrapastac_items_itemcollection",
+      "source": "wrapastac_base_rationale_313",
+      "target": "wrapastac_items_itemcollection",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "L20",
+      "weight": 0.8,
+      "_src": "wrapastac_base_rationale_313",
+      "_tgt": "providers_base_provider",
+      "source": "wrapastac_base_rationale_313",
       "target": "providers_base_provider",
       "confidence_score": 0.5
     },
@@ -6652,12 +6762,24 @@
       "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_items.py",
-      "source_location": "L125",
+      "source_location": "L174",
       "weight": 1.0,
       "_src": "src_wrapastac_items_py",
       "_tgt": "wrapastac_items_parse_dt",
       "source": "src_wrapastac_items_py",
       "target": "wrapastac_items_parse_dt",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/_items.py",
+      "source_location": "L180",
+      "weight": 1.0,
+      "_src": "src_wrapastac_items_py",
+      "_tgt": "wrapastac_items_matches_tile",
+      "source": "src_wrapastac_items_py",
+      "target": "wrapastac_items_matches_tile",
       "confidence_score": 1.0
     },
     {
@@ -6736,7 +6858,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_items.py",
-      "source_location": "L115",
+      "source_location": "L122",
       "weight": 1.0,
       "_src": "wrapastac_items_itemcollection_filter",
       "_tgt": "wrapastac_items_itemcollection",
@@ -6745,10 +6867,34 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/_items.py",
+      "source_location": "L134",
+      "weight": 1.0,
+      "_src": "wrapastac_items_itemcollection_sort_by_cloud_cover",
+      "_tgt": "wrapastac_items_itemcollection",
+      "source": "wrapastac_items_itemcollection",
+      "target": "wrapastac_items_itemcollection_sort_by_cloud_cover",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/_items.py",
+      "source_location": "L164",
+      "weight": 1.0,
+      "_src": "wrapastac_items_itemcollection_unique_dates",
+      "_tgt": "wrapastac_items_itemcollection",
+      "source": "wrapastac_items_itemcollection",
+      "target": "wrapastac_items_itemcollection_unique_dates",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_items.py",
-      "source_location": "L117",
+      "source_location": "L166",
       "weight": 1.0,
       "_src": "wrapastac_items_itemcollection",
       "_tgt": "wrapastac_items_itemcollection_assert_non_empty",
@@ -6796,7 +6942,7 @@
       "relation": "calls",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_items.py",
-      "source_location": "L100",
+      "source_location": "L104",
       "weight": 1.0,
       "_src": "wrapastac_items_itemcollection_filter",
       "_tgt": "wrapastac_items_parse_dt",
@@ -6805,15 +6951,51 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/_items.py",
+      "source_location": "L120",
+      "weight": 1.0,
+      "_src": "wrapastac_items_itemcollection_filter",
+      "_tgt": "wrapastac_items_matches_tile",
+      "source": "wrapastac_items_itemcollection_filter",
+      "target": "wrapastac_items_matches_tile",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/_items.py",
-      "source_location": "L83",
+      "source_location": "L84",
       "weight": 1.0,
-      "_src": "wrapastac_items_rationale_83",
+      "_src": "wrapastac_items_rationale_84",
       "_tgt": "wrapastac_items_itemcollection_filter",
       "source": "wrapastac_items_itemcollection_filter",
-      "target": "wrapastac_items_rationale_83",
+      "target": "wrapastac_items_rationale_84",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/_items.py",
+      "source_location": "L125",
+      "weight": 1.0,
+      "_src": "wrapastac_items_rationale_125",
+      "_tgt": "wrapastac_items_itemcollection_sort_by_cloud_cover",
+      "source": "wrapastac_items_itemcollection_sort_by_cloud_cover",
+      "target": "wrapastac_items_rationale_125",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/_items.py",
+      "source_location": "L140",
+      "weight": 1.0,
+      "_src": "wrapastac_items_rationale_140",
+      "_tgt": "wrapastac_items_itemcollection_unique_dates",
+      "source": "wrapastac_items_itemcollection_unique_dates",
+      "target": "wrapastac_items_rationale_140",
       "confidence_score": 1.0
     },
     {
@@ -6821,7 +7003,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src/wrapastac/_items.py",
-      "source_location": "L119",
+      "source_location": "L168",
       "weight": 1.0,
       "_src": "wrapastac_items_itemcollection_assert_non_empty",
       "_tgt": "wrapastac_exceptions_emptyitemcollectionerror",
@@ -6882,9 +7064,33 @@
       "source_file": "src/wrapastac/_items.py",
       "source_location": "L11",
       "weight": 0.8,
-      "_src": "wrapastac_items_rationale_83",
+      "_src": "wrapastac_items_rationale_84",
       "_tgt": "wrapastac_exceptions_emptyitemcollectionerror",
-      "source": "wrapastac_items_rationale_83",
+      "source": "wrapastac_items_rationale_84",
+      "target": "wrapastac_exceptions_emptyitemcollectionerror",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/wrapastac/_items.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "wrapastac_items_rationale_125",
+      "_tgt": "wrapastac_exceptions_emptyitemcollectionerror",
+      "source": "wrapastac_items_rationale_125",
+      "target": "wrapastac_exceptions_emptyitemcollectionerror",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/wrapastac/_items.py",
+      "source_location": "L11",
+      "weight": 0.8,
+      "_src": "wrapastac_items_rationale_140",
+      "_tgt": "wrapastac_exceptions_emptyitemcollectionerror",
+      "source": "wrapastac_items_rationale_140",
       "target": "wrapastac_exceptions_emptyitemcollectionerror",
       "confidence_score": 0.5
     },
@@ -6952,6 +7158,18 @@
       "relation": "calls",
       "confidence": "INFERRED",
       "confidence_score": 0.8,
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "_src": "providers_copernicus_dataspace_copernicusdataspaceecosystem_init",
+      "_tgt": "valueerror",
+      "source": "valueerror",
+      "target": "providers_copernicus_dataspace_copernicusdataspaceecosystem_init"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
       "source_file": "src/wrapastac/geometry/__init__.py",
       "source_location": "L89",
       "weight": 1.0,
@@ -6978,10 +7196,22 @@
       "source_file": "src/wrapastac/providers/__init__.py",
       "source_location": "L3",
       "weight": 0.8,
-      "_src": "providers_init_rationale_15",
+      "_src": "providers_init_rationale_19",
       "_tgt": "wrapastac_exceptions_unknownprovidererror",
       "source": "wrapastac_exceptions_unknownprovidererror",
-      "target": "providers_init_rationale_15",
+      "target": "providers_init_rationale_19",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "L3",
+      "weight": 0.8,
+      "_src": "providers_init_rationale_32",
+      "_tgt": "wrapastac_exceptions_unknownprovidererror",
+      "source": "wrapastac_exceptions_unknownprovidererror",
+      "target": "providers_init_rationale_32",
       "confidence_score": 0.5
     },
     {
@@ -6989,7 +7219,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src/wrapastac/providers/__init__.py",
-      "source_location": "L28",
+      "source_location": "L45",
       "weight": 1.0,
       "_src": "providers_init_resolve_provider",
       "_tgt": "wrapastac_exceptions_unknownprovidererror",
@@ -7025,7 +7255,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.8,
       "source_file": "src/wrapastac/collections/sentinel2.py",
-      "source_location": "L34",
+      "source_location": "L35",
       "weight": 1.0,
       "_src": "collections_sentinel2_sentinel2_maybe_harmonise",
       "_tgt": "wrapastac_harmonise_maybe_harmonise_s2",
@@ -7093,6 +7323,18 @@
       "confidence_score": 1.0
     },
     {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/_base.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "_src": "src_wrapastac_providers_base_py",
+      "_tgt": "providers_base_use_cql2",
+      "source": "src_wrapastac_providers_base_py",
+      "target": "providers_base_use_cql2",
+      "confidence_score": 1.0
+    },
+    {
       "relation": "inherits",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/providers/_base.py",
@@ -7108,7 +7350,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/providers/_base.py",
-      "source_location": "L30",
+      "source_location": "L40",
       "weight": 1.0,
       "_src": "providers_base_provider",
       "_tgt": "providers_base_provider_repr",
@@ -7131,13 +7373,73 @@
     {
       "relation": "uses",
       "confidence": "INFERRED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L9",
+      "weight": 0.8,
+      "_src": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "_tgt": "providers_base_provider",
+      "source": "providers_base_provider",
+      "target": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L9",
+      "weight": 0.8,
+      "_src": "providers_copernicus_dataspace_rationale_13",
+      "_tgt": "providers_base_provider",
+      "source": "providers_base_provider",
+      "target": "providers_copernicus_dataspace_rationale_13",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L9",
+      "weight": 0.8,
+      "_src": "providers_copernicus_dataspace_rationale_49",
+      "_tgt": "providers_base_provider",
+      "source": "providers_base_provider",
+      "target": "providers_copernicus_dataspace_rationale_49",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L9",
+      "weight": 0.8,
+      "_src": "providers_copernicus_dataspace_rationale_67",
+      "_tgt": "providers_base_provider",
+      "source": "providers_base_provider",
+      "target": "providers_copernicus_dataspace_rationale_67",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
       "source_file": "src/wrapastac/providers/__init__.py",
       "source_location": "L4",
       "weight": 0.8,
-      "_src": "providers_init_rationale_15",
+      "_src": "providers_init_rationale_19",
       "_tgt": "providers_base_provider",
       "source": "providers_base_provider",
-      "target": "providers_init_rationale_15",
+      "target": "providers_init_rationale_19",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "L4",
+      "weight": 0.8,
+      "_src": "providers_init_rationale_32",
+      "_tgt": "providers_base_provider",
+      "source": "providers_base_provider",
+      "target": "providers_init_rationale_32",
       "confidence_score": 0.5
     },
     {
@@ -7191,8 +7493,224 @@
     {
       "relation": "contains",
       "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "src_wrapastac_providers_copernicus_dataspace_py",
+      "_tgt": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "source": "src_wrapastac_providers_copernicus_dataspace_py",
+      "target": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "_src": "src_wrapastac_providers_copernicus_dataspace_py",
+      "_tgt": "providers_copernicus_dataspace_api_url",
+      "source": "src_wrapastac_providers_copernicus_dataspace_py",
+      "target": "providers_copernicus_dataspace_api_url",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L45",
+      "weight": 1.0,
+      "_src": "src_wrapastac_providers_copernicus_dataspace_py",
+      "_tgt": "providers_copernicus_dataspace_use_cql2",
+      "source": "src_wrapastac_providers_copernicus_dataspace_py",
+      "target": "providers_copernicus_dataspace_use_cql2",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L77",
+      "weight": 1.0,
+      "_src": "src_wrapastac_providers_copernicus_dataspace_py",
+      "_tgt": "providers_copernicus_dataspace_modifier",
+      "source": "src_wrapastac_providers_copernicus_dataspace_py",
+      "target": "providers_copernicus_dataspace_modifier",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "_src": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "_tgt": "provider",
+      "source": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "target": "provider",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "_src": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "_tgt": "providers_copernicus_dataspace_copernicusdataspaceecosystem_init",
+      "source": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "target": "providers_copernicus_dataspace_copernicusdataspaceecosystem_init",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L48",
+      "weight": 1.0,
+      "_src": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "_tgt": "providers_copernicus_dataspace_copernicusdataspaceecosystem_get_token",
+      "source": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "target": "providers_copernicus_dataspace_copernicusdataspaceecosystem_get_token",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L66",
+      "weight": 1.0,
+      "_src": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "_tgt": "providers_copernicus_dataspace_copernicusdataspaceecosystem_make_modifier",
+      "source": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "target": "providers_copernicus_dataspace_copernicusdataspaceecosystem_make_modifier",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "_src": "providers_copernicus_dataspace_rationale_13",
+      "_tgt": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "source": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "target": "providers_copernicus_dataspace_rationale_13",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
       "source_file": "src/wrapastac/providers/__init__.py",
-      "source_location": "L14",
+      "source_location": "L5",
+      "weight": 0.8,
+      "_src": "providers_init_rationale_19",
+      "_tgt": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "source": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "target": "providers_init_rationale_19",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "L5",
+      "weight": 0.8,
+      "_src": "providers_init_rationale_32",
+      "_tgt": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "source": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "target": "providers_init_rationale_32",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "L28",
+      "weight": 1.0,
+      "_src": "providers_init_get_cdse_provider",
+      "_tgt": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "source": "providers_copernicus_dataspace_copernicusdataspaceecosystem",
+      "target": "providers_init_get_cdse_provider"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/element84.py",
+      "source_location": "L6",
+      "weight": 1.0,
+      "_src": "providers_element84_element84",
+      "_tgt": "provider",
+      "source": "provider",
+      "target": "providers_element84_element84",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/planetary_computer.py",
+      "source_location": "L8",
+      "weight": 1.0,
+      "_src": "providers_planetary_computer_planetarycomputer",
+      "_tgt": "provider",
+      "source": "provider",
+      "target": "providers_planetary_computer_planetarycomputer",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L49",
+      "weight": 1.0,
+      "_src": "providers_copernicus_dataspace_rationale_49",
+      "_tgt": "providers_copernicus_dataspace_copernicusdataspaceecosystem_get_token",
+      "source": "providers_copernicus_dataspace_copernicusdataspaceecosystem_get_token",
+      "target": "providers_copernicus_dataspace_rationale_49",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L78",
+      "weight": 1.0,
+      "_src": "providers_copernicus_dataspace_modifier",
+      "_tgt": "providers_copernicus_dataspace_copernicusdataspaceecosystem_make_modifier",
+      "source": "providers_copernicus_dataspace_copernicusdataspaceecosystem_make_modifier",
+      "target": "providers_copernicus_dataspace_modifier",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "L67",
+      "weight": 1.0,
+      "_src": "providers_copernicus_dataspace_rationale_67",
+      "_tgt": "providers_copernicus_dataspace_copernicusdataspaceecosystem_make_modifier",
+      "source": "providers_copernicus_dataspace_copernicusdataspaceecosystem_make_modifier",
+      "target": "providers_copernicus_dataspace_rationale_67",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "_src": "src_wrapastac_providers_init_py",
+      "_tgt": "providers_init_get_cdse_provider",
+      "source": "src_wrapastac_providers_init_py",
+      "target": "providers_init_get_cdse_provider",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "L31",
       "weight": 1.0,
       "_src": "src_wrapastac_providers_init_py",
       "_tgt": "providers_init_resolve_provider",
@@ -7204,24 +7722,48 @@
       "relation": "rationale_for",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/providers/__init__.py",
-      "source_location": "L15",
+      "source_location": "L19",
       "weight": 1.0,
-      "_src": "providers_init_rationale_15",
+      "_src": "providers_init_rationale_19",
+      "_tgt": "providers_init_get_cdse_provider",
+      "source": "providers_init_get_cdse_provider",
+      "target": "providers_init_rationale_19",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "_src": "providers_init_rationale_32",
       "_tgt": "providers_init_resolve_provider",
       "source": "providers_init_resolve_provider",
-      "target": "providers_init_rationale_15",
+      "target": "providers_init_rationale_32",
       "confidence_score": 1.0
     },
     {
       "relation": "uses",
       "confidence": "INFERRED",
       "source_file": "src/wrapastac/providers/__init__.py",
-      "source_location": "L5",
+      "source_location": "L6",
       "weight": 0.8,
-      "_src": "providers_init_rationale_15",
+      "_src": "providers_init_rationale_19",
       "_tgt": "providers_element84_element84",
-      "source": "providers_init_rationale_15",
+      "source": "providers_init_rationale_19",
       "target": "providers_element84_element84",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "L7",
+      "weight": 0.8,
+      "_src": "providers_init_rationale_19",
+      "_tgt": "providers_planetary_computer_planetarycomputer",
+      "source": "providers_init_rationale_19",
+      "target": "providers_planetary_computer_planetarycomputer",
       "confidence_score": 0.5
     },
     {
@@ -7230,9 +7772,21 @@
       "source_file": "src/wrapastac/providers/__init__.py",
       "source_location": "L6",
       "weight": 0.8,
-      "_src": "providers_init_rationale_15",
+      "_src": "providers_init_rationale_32",
+      "_tgt": "providers_element84_element84",
+      "source": "providers_init_rationale_32",
+      "target": "providers_element84_element84",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "L7",
+      "weight": 0.8,
+      "_src": "providers_init_rationale_32",
       "_tgt": "providers_planetary_computer_planetarycomputer",
-      "source": "providers_init_rationale_15",
+      "source": "providers_init_rationale_32",
       "target": "providers_planetary_computer_planetarycomputer",
       "confidence_score": 0.5
     },
@@ -7261,15 +7815,15 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "inherits",
+      "relation": "contains",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/providers/element84.py",
-      "source_location": "L6",
+      "source_location": "L17",
       "weight": 1.0,
-      "_src": "providers_element84_element84",
-      "_tgt": "provider",
-      "source": "providers_element84_element84",
-      "target": "provider",
+      "_src": "src_wrapastac_providers_element84_py",
+      "_tgt": "providers_element84_use_cql2",
+      "source": "src_wrapastac_providers_element84_py",
+      "target": "providers_element84_use_cql2",
       "confidence_score": 1.0
     },
     {
@@ -7282,18 +7836,6 @@
       "_tgt": "providers_element84_element84",
       "source": "providers_element84_element84",
       "target": "providers_element84_rationale_7",
-      "confidence_score": 1.0
-    },
-    {
-      "relation": "inherits",
-      "confidence": "EXTRACTED",
-      "source_file": "src/wrapastac/providers/planetary_computer.py",
-      "source_location": "L8",
-      "weight": 1.0,
-      "_src": "providers_planetary_computer_planetarycomputer",
-      "_tgt": "provider",
-      "source": "provider",
-      "target": "providers_planetary_computer_planetarycomputer",
       "confidence_score": 1.0
     },
     {
@@ -7648,7 +8190,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/collections/sentinel2.py",
-      "source_location": "L28",
+      "source_location": "L29",
       "weight": 1.0,
       "_src": "collections_sentinel2_sentinel2",
       "_tgt": "collections_sentinel2_sentinel2_build_query",
@@ -7660,7 +8202,7 @@
       "relation": "method",
       "confidence": "EXTRACTED",
       "source_file": "src/wrapastac/collections/sentinel2.py",
-      "source_location": "L33",
+      "source_location": "L34",
       "weight": 1.0,
       "_src": "collections_sentinel2_sentinel2",
       "_tgt": "collections_sentinel2_sentinel2_maybe_harmonise",
@@ -7705,111 +8247,63 @@
       "confidence_score": 1.0
     },
     {
-      "relation": "implements",
+      "relation": "calls",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 207",
+      "source_file": "tests/test_items.py",
+      "source_location": "line 7",
       "weight": 1.0,
-      "_src": "staccollection_class",
-      "_tgt": "collectionbase_class",
-      "source": "collectionbase_class",
-      "target": "staccollection_class"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 259",
-      "weight": 1.0,
-      "_src": "staticstaccollection_class",
-      "_tgt": "collectionbase_class",
-      "source": "collectionbase_class",
-      "target": "staticstaccollection_class"
+      "_src": "test_items_module",
+      "_tgt": "conftest_make_item",
+      "source": "conftest_make_item",
+      "target": "test_items_module"
     },
     {
       "relation": "calls",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 56",
-      "weight": 1.0,
-      "_src": "collectionbase_class",
-      "_tgt": "resolve_provider_func",
-      "source": "collectionbase_class",
-      "target": "resolve_provider_func"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/sentinel1.py",
-      "source_location": "line 8",
-      "weight": 1.0,
-      "_src": "sentinel1_class",
-      "_tgt": "staccollection_class",
-      "source": "staccollection_class",
-      "target": "sentinel1_class"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "tests/test_base.py",
-      "source_location": "line 8",
+      "source_location": "line 7",
       "weight": 1.0,
       "_src": "test_base_module",
-      "_tgt": "staccollection_class",
-      "source": "staccollection_class",
+      "_tgt": "conftest_make_item",
+      "source": "conftest_make_item",
       "target": "test_base_module"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "tests/test_collections.py",
-      "source_location": "line 5",
+      "source_file": "tests/test_items.py",
+      "source_location": "line 9",
       "weight": 1.0,
-      "_src": "test_collections_module",
-      "_tgt": "staccollection_class",
-      "source": "staccollection_class",
-      "target": "test_collections_module"
+      "_src": "test_items_module",
+      "_tgt": "emptyitemcollectionerror",
+      "source": "test_items_module",
+      "target": "emptyitemcollectionerror"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/wrapastac/__init__.py",
-      "source_location": "line 18",
+      "source_file": "tests/test_collections.py",
+      "source_location": "line 6",
       "weight": 1.0,
-      "_src": "wrapastac_init",
-      "_tgt": "staccollection_class",
-      "source": "staccollection_class",
-      "target": "wrapastac_init"
+      "_src": "test_collections_module",
+      "_tgt": "sentinel1_class",
+      "source": "test_collections_module",
+      "target": "sentinel1_class"
     },
     {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.75,
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": null,
-      "weight": 0.75,
-      "_src": "staccollection_class",
-      "_tgt": "staticstaccollection_class",
-      "source": "staccollection_class",
-      "target": "staticstaccollection_class"
-    },
-    {
-      "relation": "implements",
+      "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/dem.py",
-      "source_location": "line 8",
+      "source_file": "tests/test_collections.py",
+      "source_location": "line 6",
       "weight": 1.0,
-      "_src": "copdem30_class",
-      "_tgt": "staticstaccollection_class",
-      "source": "staticstaccollection_class",
+      "_src": "test_collections_module",
+      "_tgt": "copdem30_class",
+      "source": "test_collections_module",
       "target": "copdem30_class"
     },
     {
@@ -7817,324 +8311,60 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_base.py",
-      "source_location": "line 8",
-      "weight": 1.0,
-      "_src": "test_base_module",
-      "_tgt": "staticstaccollection_class",
-      "source": "staticstaccollection_class",
-      "target": "test_base_module"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tests/test_collections.py",
-      "source_location": "line 5",
-      "weight": 1.0,
-      "_src": "test_collections_module",
-      "_tgt": "staticstaccollection_class",
-      "source": "staticstaccollection_class",
-      "target": "test_collections_module"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/__init__.py",
-      "source_location": "line 18",
-      "weight": 1.0,
-      "_src": "wrapastac_init",
-      "_tgt": "staticstaccollection_class",
-      "source": "staticstaccollection_class",
-      "target": "wrapastac_init"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/_items.py",
-      "source_location": "line 115",
-      "weight": 1.0,
-      "_src": "filter_method",
-      "_tgt": "itemcollection_class",
-      "source": "itemcollection_class",
-      "target": "filter_method"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 256",
-      "weight": 1.0,
-      "_src": "search_method_stac",
-      "_tgt": "itemcollection_class",
-      "source": "itemcollection_class",
-      "target": "search_method_stac"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 288",
-      "weight": 1.0,
-      "_src": "search_method_static",
-      "_tgt": "itemcollection_class",
-      "source": "itemcollection_class",
-      "target": "search_method_static"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tests/test_items.py",
-      "source_location": "line 8",
-      "weight": 1.0,
-      "_src": "test_items_module",
-      "_tgt": "itemcollection_class",
-      "source": "itemcollection_class",
-      "target": "test_items_module"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tests/test_base.py",
-      "source_location": "line 9",
-      "weight": 1.0,
-      "_src": "test_base_module",
-      "_tgt": "itemcollection_class",
-      "source": "itemcollection_class",
-      "target": "test_base_module"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/__init__.py",
-      "source_location": "line 19",
-      "weight": 1.0,
-      "_src": "wrapastac_init",
-      "_tgt": "itemcollection_class",
-      "source": "itemcollection_class",
-      "target": "wrapastac_init"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "INFERRED",
-      "confidence_score": 0.8,
-      "source_file": "tests/conftest.py",
-      "source_location": null,
-      "weight": 0.8,
-      "_src": "conftest_make_item",
-      "_tgt": "itemcollection_class",
-      "source": "itemcollection_class",
-      "target": "conftest_make_item"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/providers/element84.py",
-      "source_location": "line 6",
-      "weight": 1.0,
-      "_src": "element84_provider",
-      "_tgt": "provider_abc",
-      "source": "provider_abc",
-      "target": "element84_provider"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/providers/planetary_computer.py",
-      "source_location": "line 8",
-      "weight": 1.0,
-      "_src": "planetarycomputer_provider",
-      "_tgt": "provider_abc",
-      "source": "provider_abc",
-      "target": "planetarycomputer_provider"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/providers/__init__.py",
-      "source_location": "line 9",
-      "weight": 1.0,
-      "_src": "provider_registry",
-      "_tgt": "element84_provider",
-      "source": "element84_provider",
-      "target": "provider_registry"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/sentinel2.py",
-      "source_location": "line 16",
-      "weight": 1.0,
-      "_src": "sentinel2_class",
-      "_tgt": "element84_provider",
-      "source": "element84_provider",
-      "target": "sentinel2_class"
-    },
-    {
-      "relation": "shares_data_with",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/providers/__init__.py",
       "source_location": "line 10",
       "weight": 1.0,
-      "_src": "provider_registry",
-      "_tgt": "planetarycomputer_provider",
-      "source": "planetarycomputer_provider",
-      "target": "provider_registry"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/providers/__init__.py",
-      "source_location": "line 28",
-      "weight": 1.0,
-      "_src": "resolve_provider_func",
+      "_src": "test_base_module",
       "_tgt": "unknownprovidererror",
-      "source": "resolve_provider_func",
+      "source": "test_base_module",
       "target": "unknownprovidererror"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_file": "tests/test_geometry.py",
       "source_location": "line 8",
       "weight": 1.0,
-      "_src": "resolve_provider_func",
-      "_tgt": "provider_registry",
-      "source": "resolve_provider_func",
-      "target": "provider_registry"
+      "_src": "test_geometry_module",
+      "_tgt": "point_to_bbox_func",
+      "source": "test_geometry_module",
+      "target": "point_to_bbox_func"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/wrapastac/__init__.py",
-      "source_location": "line 32",
+      "source_file": "tests/test_geometry.py",
+      "source_location": "line 8",
       "weight": 1.0,
-      "_src": "wrapastac_init",
-      "_tgt": "resolve_provider_func",
-      "source": "resolve_provider_func",
-      "target": "wrapastac_init"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/_items.py",
-      "source_location": "line 119",
-      "weight": 1.0,
-      "_src": "assert_non_empty_method",
-      "_tgt": "emptyitemcollectionerror",
-      "source": "emptyitemcollectionerror",
-      "target": "assert_non_empty_method"
+      "_src": "test_geometry_module",
+      "_tgt": "point_to_circle_func",
+      "source": "test_geometry_module",
+      "target": "point_to_circle_func"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "tests/test_items.py",
-      "source_location": "line 9",
+      "source_file": "tests/test_geometry.py",
+      "source_location": "line 8",
       "weight": 1.0,
-      "_src": "test_items_module",
-      "_tgt": "emptyitemcollectionerror",
-      "source": "emptyitemcollectionerror",
-      "target": "test_items_module"
+      "_src": "test_geometry_module",
+      "_tgt": "bbox_func",
+      "source": "test_geometry_module",
+      "target": "bbox_func"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/wrapastac/__init__.py",
-      "source_location": "line 31",
+      "source_file": "tests/test_geometry.py",
+      "source_location": "line 7",
       "weight": 1.0,
-      "_src": "wrapastac_init",
-      "_tgt": "emptyitemcollectionerror",
-      "source": "emptyitemcollectionerror",
-      "target": "wrapastac_init"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.7,
-      "source_file": "src/wrapastac/exceptions.py",
-      "source_location": null,
-      "weight": 0.7,
-      "_src": "emptyitemcollectionerror",
-      "_tgt": "unknownprovidererror",
-      "source": "emptyitemcollectionerror",
-      "target": "unknownprovidererror"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tests/test_base.py",
-      "source_location": "line 10",
-      "weight": 1.0,
-      "_src": "test_base_module",
-      "_tgt": "unknownprovidererror",
-      "source": "unknownprovidererror",
-      "target": "test_base_module"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/__init__.py",
-      "source_location": "line 31",
-      "weight": 1.0,
-      "_src": "wrapastac_init",
-      "_tgt": "unknownprovidererror",
-      "source": "unknownprovidererror",
-      "target": "wrapastac_init"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 194",
-      "weight": 1.0,
-      "_src": "load_method",
-      "_tgt": "maybe_harmonise_s2_func",
-      "source": "maybe_harmonise_s2_func",
-      "target": "load_method"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/sentinel2.py",
-      "source_location": "line 34",
-      "weight": 1.0,
-      "_src": "sentinel2_maybe_harmonise_method",
-      "_tgt": "maybe_harmonise_s2_func",
-      "source": "maybe_harmonise_s2_func",
-      "target": "sentinel2_maybe_harmonise_method"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 162",
-      "weight": 1.0,
-      "_src": "load_method",
+      "_src": "test_geometry_module",
       "_tgt": "get_utm_epsg_func",
-      "source": "get_utm_epsg_func",
-      "target": "load_method"
+      "source": "test_geometry_module",
+      "target": "get_utm_epsg_func"
     },
     {
       "relation": "calls",
@@ -8164,25 +8394,13 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "tests/test_geometry.py",
-      "source_location": "line 7",
+      "source_file": "src/wrapastac/_crs.py",
+      "source_location": "line 15",
       "weight": 1.0,
-      "_src": "test_geometry_module",
-      "_tgt": "get_utm_epsg_func",
-      "source": "get_utm_epsg_func",
-      "target": "test_geometry_module"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 174",
-      "weight": 1.0,
-      "_src": "load_method",
-      "_tgt": "geometry_from_epsg_to_epsg_func",
+      "_src": "geometry_from_epsg_to_epsg_func",
+      "_tgt": "wgs84_epsg_const",
       "source": "geometry_from_epsg_to_epsg_func",
-      "target": "load_method"
+      "target": "wgs84_epsg_const"
     },
     {
       "relation": "calls",
@@ -8212,37 +8430,61 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/wrapastac/_crs.py",
-      "source_location": "line 15",
+      "source_file": "src/wrapastac/__init__.py",
+      "source_location": "line 31",
       "weight": 1.0,
-      "_src": "geometry_from_epsg_to_epsg_func",
-      "_tgt": "wgs84_epsg_const",
-      "source": "geometry_from_epsg_to_epsg_func",
-      "target": "wgs84_epsg_const"
+      "_src": "wrapastac_init",
+      "_tgt": "emptyitemcollectionerror",
+      "source": "wrapastac_init",
+      "target": "emptyitemcollectionerror"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 118",
+      "source_file": "src/wrapastac/__init__.py",
+      "source_location": "line 31",
       "weight": 1.0,
-      "_src": "get_epsg_method",
-      "_tgt": "wgs84_epsg_const",
-      "source": "wgs84_epsg_const",
-      "target": "get_epsg_method"
+      "_src": "wrapastac_init",
+      "_tgt": "unknownprovidererror",
+      "source": "wrapastac_init",
+      "target": "unknownprovidererror"
     },
     {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "tests/test_geometry.py",
-      "source_location": "line 8",
+      "source_file": "src/wrapastac/__init__.py",
+      "source_location": "line 26",
       "weight": 1.0,
-      "_src": "test_geometry_module",
-      "_tgt": "point_to_bbox_func",
-      "source": "point_to_bbox_func",
-      "target": "test_geometry_module"
+      "_src": "wrapastac_init",
+      "_tgt": "sentinel1_class",
+      "source": "wrapastac_init",
+      "target": "sentinel1_class"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/wrapastac/__init__.py",
+      "source_location": "line 23",
+      "weight": 1.0,
+      "_src": "wrapastac_init",
+      "_tgt": "copdem30_class",
+      "source": "wrapastac_init",
+      "target": "copdem30_class"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.7,
+      "source_file": "src/wrapastac/exceptions.py",
+      "source_location": null,
+      "weight": 0.7,
+      "_src": "emptyitemcollectionerror",
+      "_tgt": "unknownprovidererror",
+      "source": "emptyitemcollectionerror",
+      "target": "unknownprovidererror"
     },
     {
       "relation": "semantically_similar_to",
@@ -8255,162 +8497,6 @@
       "_tgt": "point_to_circle_func",
       "source": "point_to_bbox_func",
       "target": "point_to_circle_func"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tests/test_geometry.py",
-      "source_location": "line 8",
-      "weight": 1.0,
-      "_src": "test_geometry_module",
-      "_tgt": "point_to_circle_func",
-      "source": "point_to_circle_func",
-      "target": "test_geometry_module"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tests/test_geometry.py",
-      "source_location": "line 8",
-      "weight": 1.0,
-      "_src": "test_geometry_module",
-      "_tgt": "bbox_func",
-      "source": "bbox_func",
-      "target": "test_geometry_module"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tests/test_collections.py",
-      "source_location": "line 6",
-      "weight": 1.0,
-      "_src": "test_collections_module",
-      "_tgt": "sentinel1_class",
-      "source": "sentinel1_class",
-      "target": "test_collections_module"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/__init__.py",
-      "source_location": "line 26",
-      "weight": 1.0,
-      "_src": "wrapastac_init",
-      "_tgt": "sentinel1_class",
-      "source": "sentinel1_class",
-      "target": "wrapastac_init"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tests/test_collections.py",
-      "source_location": "line 6",
-      "weight": 1.0,
-      "_src": "test_collections_module",
-      "_tgt": "copdem30_class",
-      "source": "copdem30_class",
-      "target": "test_collections_module"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/__init__.py",
-      "source_location": "line 23",
-      "weight": 1.0,
-      "_src": "wrapastac_init",
-      "_tgt": "copdem30_class",
-      "source": "copdem30_class",
-      "target": "wrapastac_init"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tests/test_items.py",
-      "source_location": "line 7",
-      "weight": 1.0,
-      "_src": "test_items_module",
-      "_tgt": "conftest_make_item",
-      "source": "conftest_make_item",
-      "target": "test_items_module"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tests/test_base.py",
-      "source_location": "line 7",
-      "weight": 1.0,
-      "_src": "test_base_module",
-      "_tgt": "conftest_make_item",
-      "source": "conftest_make_item",
-      "target": "test_base_module"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 147",
-      "weight": 1.0,
-      "_src": "load_method",
-      "_tgt": "assert_non_empty_method",
-      "source": "load_method",
-      "target": "assert_non_empty_method"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 156",
-      "weight": 1.0,
-      "_src": "load_method",
-      "_tgt": "resolve_bands_method",
-      "source": "load_method",
-      "target": "resolve_bands_method"
-    },
-    {
-      "relation": "calls",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/_base.py",
-      "source_location": "line 158",
-      "weight": 1.0,
-      "_src": "load_method",
-      "_tgt": "get_epsg_method",
-      "source": "load_method",
-      "target": "get_epsg_method"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/lulc.py",
-      "source_location": "line 8",
-      "weight": 1.0,
-      "_src": "esrilulc_class",
-      "_tgt": "staticstaccollection_base",
-      "source": "esrilulc_class",
-      "target": "staticstaccollection_base"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/__init__.py",
-      "source_location": "line 5",
-      "weight": 1.0,
-      "_src": "collections_init",
-      "_tgt": "esrilulc_class",
-      "source": "esrilulc_class",
-      "target": "collections_init"
     },
     {
       "relation": "implements",
@@ -8449,18 +8535,6 @@
       "target": "rzlulc_class"
     },
     {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/lulc.py",
-      "source_location": "line 24",
-      "weight": 1.0,
-      "_src": "rzlulc_class",
-      "_tgt": "staticstaccollection_base",
-      "source": "rzlulc_class",
-      "target": "staticstaccollection_base"
-    },
-    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
@@ -8468,8 +8542,8 @@
       "source_location": "line 5",
       "weight": 1.0,
       "_src": "collections_init",
-      "_tgt": "rzlulc_class",
-      "source": "rzlulc_class",
+      "_tgt": "esrilulc_class",
+      "source": "esrilulc_class",
       "target": "collections_init"
     },
     {
@@ -8497,27 +8571,15 @@
       "target": "planetary_computer_provider"
     },
     {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/hls.py",
-      "source_location": "line 8",
-      "weight": 1.0,
-      "_src": "hlslandsat_class",
-      "_tgt": "staccollection_base",
-      "source": "hlslandsat_class",
-      "target": "staccollection_base"
-    },
-    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "src/wrapastac/collections/__init__.py",
-      "source_location": "line 2",
+      "source_location": "line 5",
       "weight": 1.0,
       "_src": "collections_init",
-      "_tgt": "hlslandsat_class",
-      "source": "hlslandsat_class",
+      "_tgt": "rzlulc_class",
+      "source": "rzlulc_class",
       "target": "collections_init"
     },
     {
@@ -8529,8 +8591,68 @@
       "weight": 1.0,
       "_src": "hlslandsat_class",
       "_tgt": "fallback_band_mapping_pattern",
-      "source": "hlslandsat_class",
-      "target": "fallback_band_mapping_pattern"
+      "source": "fallback_band_mapping_pattern",
+      "target": "hlslandsat_class"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/wrapastac/collections/hls.py",
+      "source_location": "line 52",
+      "weight": 1.0,
+      "_src": "hlssentinel_class",
+      "_tgt": "fallback_band_mapping_pattern",
+      "source": "fallback_band_mapping_pattern",
+      "target": "hlssentinel_class"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/wrapastac/collections/lidar.py",
+      "source_location": "line 36",
+      "weight": 1.0,
+      "_src": "lidarengland_class",
+      "_tgt": "fallback_band_mapping_pattern",
+      "source": "fallback_band_mapping_pattern",
+      "target": "lidarengland_class"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/wrapastac/collections/hls.py",
+      "source_location": "line 12",
+      "weight": 1.0,
+      "_src": "hlslandsat_class",
+      "_tgt": "planetary_computer_provider",
+      "source": "planetary_computer_provider",
+      "target": "hlslandsat_class"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/wrapastac/collections/hls.py",
+      "source_location": "line 42",
+      "weight": 1.0,
+      "_src": "hlssentinel_class",
+      "_tgt": "planetary_computer_provider",
+      "source": "planetary_computer_provider",
+      "target": "hlssentinel_class"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/wrapastac/collections/landsat.py",
+      "source_location": "line 12",
+      "weight": 1.0,
+      "_src": "landsat_class",
+      "_tgt": "planetary_computer_provider",
+      "source": "planetary_computer_provider",
+      "target": "landsat_class"
     },
     {
       "relation": "implements",
@@ -8560,49 +8682,13 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/hls.py",
-      "source_location": "line 12",
-      "weight": 1.0,
-      "_src": "hlslandsat_class",
-      "_tgt": "planetary_computer_provider",
-      "source": "hlslandsat_class",
-      "target": "planetary_computer_provider"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/hls.py",
-      "source_location": "line 39",
-      "weight": 1.0,
-      "_src": "hlssentinel_class",
-      "_tgt": "staccollection_base",
-      "source": "hlssentinel_class",
-      "target": "staccollection_base"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "src/wrapastac/collections/__init__.py",
       "source_location": "line 2",
       "weight": 1.0,
       "_src": "collections_init",
-      "_tgt": "hlssentinel_class",
-      "source": "hlssentinel_class",
+      "_tgt": "hlslandsat_class",
+      "source": "hlslandsat_class",
       "target": "collections_init"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/hls.py",
-      "source_location": "line 52",
-      "weight": 1.0,
-      "_src": "hlssentinel_class",
-      "_tgt": "fallback_band_mapping_pattern",
-      "source": "hlssentinel_class",
-      "target": "fallback_band_mapping_pattern"
     },
     {
       "relation": "implements",
@@ -8617,40 +8703,16 @@
       "target": "hls_harmonised_grid_concept"
     },
     {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.85,
-      "source_file": "src/wrapastac/collections/hls.py",
-      "source_location": "line 39",
-      "weight": 0.85,
-      "_src": "hlssentinel_class",
-      "_tgt": "sentinel2_class",
-      "source": "hlssentinel_class",
-      "target": "sentinel2_class"
-    },
-    {
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/hls.py",
-      "source_location": "line 42",
+      "source_file": "src/wrapastac/collections/__init__.py",
+      "source_location": "line 2",
       "weight": 1.0,
-      "_src": "hlssentinel_class",
-      "_tgt": "planetary_computer_provider",
+      "_src": "collections_init",
+      "_tgt": "hlssentinel_class",
       "source": "hlssentinel_class",
-      "target": "planetary_computer_provider"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/landsat.py",
-      "source_location": "line 8",
-      "weight": 1.0,
-      "_src": "landsat_class",
-      "_tgt": "staccollection_base",
-      "source": "landsat_class",
-      "target": "staccollection_base"
+      "target": "collections_init"
     },
     {
       "relation": "references",
@@ -8668,85 +8730,13 @@
       "relation": "references",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/landsat.py",
-      "source_location": "line 12",
-      "weight": 1.0,
-      "_src": "landsat_class",
-      "_tgt": "planetary_computer_provider",
-      "source": "landsat_class",
-      "target": "planetary_computer_provider"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/sentinel2.py",
-      "source_location": "line 12",
-      "weight": 1.0,
-      "_src": "sentinel2_class",
-      "_tgt": "staccollection_base",
-      "source": "sentinel2_class",
-      "target": "staccollection_base"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/__init__.py",
-      "source_location": "line 7",
-      "weight": 1.0,
-      "_src": "collections_init",
-      "_tgt": "sentinel2_class",
-      "source": "sentinel2_class",
-      "target": "collections_init"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/sentinel2.py",
-      "source_location": "line 16",
-      "weight": 1.0,
-      "_src": "sentinel2_class",
-      "_tgt": "planetary_computer_provider",
-      "source": "sentinel2_class",
-      "target": "planetary_computer_provider"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/lidar.py",
-      "source_location": "line 8",
-      "weight": 1.0,
-      "_src": "lidarengland_class",
-      "_tgt": "staticstaccollection_base",
-      "source": "lidarengland_class",
-      "target": "staticstaccollection_base"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
       "source_file": "src/wrapastac/collections/__init__.py",
       "source_location": "line 4",
       "weight": 1.0,
       "_src": "collections_init",
       "_tgt": "lidarengland_class",
-      "source": "lidarengland_class",
-      "target": "collections_init"
-    },
-    {
-      "relation": "implements",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/lidar.py",
-      "source_location": "line 36",
-      "weight": 1.0,
-      "_src": "lidarengland_class",
-      "_tgt": "fallback_band_mapping_pattern",
-      "source": "lidarengland_class",
-      "target": "fallback_band_mapping_pattern"
+      "source": "collections_init",
+      "target": "lidarengland_class"
     },
     {
       "relation": "implements",
@@ -8764,126 +8754,196 @@
       "relation": "implements",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/sentinel2.py",
-      "source_location": "line 30",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "_base.py:238",
       "weight": 1.0,
-      "_src": "sentinel2_build_query_method",
-      "_tgt": "cloud_cover_filter_pattern",
-      "source": "sentinel2_build_query_method",
-      "target": "cloud_cover_filter_pattern"
-    },
-    {
-      "relation": "semantically_similar_to",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "src/wrapastac/collections/sentinel2.py",
-      "source_location": "line 28",
-      "weight": 0.95,
-      "_src": "sentinel2_build_query_method",
-      "_tgt": "landsat_build_query_method",
-      "source": "sentinel2_build_query_method",
-      "target": "landsat_build_query_method"
+      "_src": "_base_staccollection",
+      "_tgt": "_base_collectionbase",
+      "source": "_base_collectionbase",
+      "target": "_base_staccollection"
     },
     {
       "relation": "implements",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/landsat.py",
-      "source_location": "line 26",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "_base.py:298",
       "weight": 1.0,
-      "_src": "landsat_build_query_method",
-      "_tgt": "cloud_cover_filter_pattern",
-      "source": "landsat_build_query_method",
-      "target": "cloud_cover_filter_pattern"
+      "_src": "_base_staticstaccollection",
+      "_tgt": "_base_collectionbase",
+      "source": "_base_collectionbase",
+      "target": "_base_staticstaccollection"
     },
     {
-      "relation": "references",
+      "relation": "shares_data_with",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "line 3",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "_base.py:107",
       "weight": 1.0,
-      "_src": "readme_doc",
-      "_tgt": "wrapastac_sdk_concept",
-      "source": "readme_doc",
-      "target": "wrapastac_sdk_concept"
+      "_src": "_base_collectionbase",
+      "_tgt": "_items_itemcollection",
+      "source": "_base_collectionbase",
+      "target": "_items_itemcollection"
     },
     {
-      "relation": "references",
+      "relation": "implements",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "line 37",
+      "source_file": "src/wrapastac/collections/sentinel2.py",
+      "source_location": "sentinel2.py:12",
       "weight": 1.0,
-      "_src": "readme_doc",
-      "_tgt": "prek_tool",
-      "source": "readme_doc",
-      "target": "prek_tool"
+      "_src": "sentinel2_sentinel2",
+      "_tgt": "_base_staccollection",
+      "source": "_base_staccollection",
+      "target": "sentinel2_sentinel2"
     },
     {
-      "relation": "references",
+      "relation": "calls",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "line 18",
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "_base.py:287",
       "weight": 1.0,
-      "_src": "readme_doc",
-      "_tgt": "just_command_runner",
-      "source": "readme_doc",
-      "target": "just_command_runner"
-    },
-    {
-      "relation": "references",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "README.md",
-      "source_location": "line 11",
-      "weight": 1.0,
-      "_src": "readme_doc",
-      "_tgt": "uv_tool",
-      "source": "readme_doc",
-      "target": "uv_tool"
+      "_src": "_base_staccollection",
+      "_tgt": "_base_query_to_cql2",
+      "source": "_base_staccollection",
+      "target": "_base_query_to_cql2"
     },
     {
       "relation": "conceptually_related_to",
       "confidence": "INFERRED",
-      "confidence_score": 0.7,
-      "source_file": "README.md",
-      "source_location": "line 37",
-      "weight": 0.7,
-      "_src": "prek_tool",
-      "_tgt": "wrapastac_sdk_concept",
-      "source": "wrapastac_sdk_concept",
-      "target": "prek_tool"
+      "confidence_score": 0.85,
+      "source_file": "src/wrapastac/_base.py",
+      "source_location": "_base.py:36",
+      "weight": 1.0,
+      "_src": "_base_query_to_cql2",
+      "_tgt": "readme_cql2_filter",
+      "source": "_base_query_to_cql2",
+      "target": "readme_cql2_filter"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "copernicus_dataspace.py:12",
+      "weight": 1.0,
+      "_src": "copernicus_dataspace_copernicusdataspaceecosystem",
+      "_tgt": "providers__base_provider",
+      "source": "providers__base_provider",
+      "target": "copernicus_dataspace_copernicusdataspaceecosystem"
+    },
+    {
+      "relation": "implements",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/wrapastac/providers/element84.py",
+      "source_location": "element84.py:6",
+      "weight": 1.0,
+      "_src": "element84_element84",
+      "_tgt": "providers__base_provider",
+      "source": "providers__base_provider",
+      "target": "element84_element84"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "__init__.py:31",
+      "weight": 1.0,
+      "_src": "providers___init___resolve_provider",
+      "_tgt": "providers__base_provider",
+      "source": "providers__base_provider",
+      "target": "providers___init___resolve_provider"
     },
     {
       "relation": "conceptually_related_to",
       "confidence": "INFERRED",
-      "confidence_score": 0.7,
+      "confidence_score": 0.9,
+      "source_file": "src/wrapastac/providers/_base.py",
+      "source_location": "_base.py:7",
+      "weight": 1.0,
+      "_src": "providers__base_provider",
+      "_tgt": "readme_provider_pattern",
+      "source": "providers__base_provider",
+      "target": "readme_provider_pattern"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "__init__.py:9",
+      "weight": 1.0,
+      "_src": "providers___init___resolve_provider",
+      "_tgt": "copernicus_dataspace_copernicusdataspaceecosystem",
+      "source": "copernicus_dataspace_copernicusdataspaceecosystem",
+      "target": "providers___init___resolve_provider"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "__init__.py:28",
+      "weight": 1.0,
+      "_src": "providers___init___get_cdse_provider",
+      "_tgt": "copernicus_dataspace_copernicusdataspaceecosystem",
+      "source": "copernicus_dataspace_copernicusdataspaceecosystem",
+      "target": "providers___init___get_cdse_provider"
+    },
+    {
+      "relation": "conceptually_related_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.9,
+      "source_file": "src/wrapastac/providers/copernicus_dataspace.py",
+      "source_location": "copernicus_dataspace.py:45",
+      "weight": 1.0,
+      "_src": "copernicus_dataspace_copernicusdataspaceecosystem",
+      "_tgt": "readme_cql2_filter",
+      "source": "copernicus_dataspace_copernicusdataspaceecosystem",
+      "target": "readme_cql2_filter"
+    },
+    {
+      "relation": "semantically_similar_to",
+      "confidence": "INFERRED",
+      "confidence_score": 0.75,
+      "source_file": "src/wrapastac/providers/element84.py",
+      "source_location": null,
+      "weight": 1.0,
+      "_src": "element84_element84",
+      "_tgt": "copernicus_dataspace_copernicusdataspaceecosystem",
+      "source": "copernicus_dataspace_copernicusdataspaceecosystem",
+      "target": "element84_element84"
+    },
+    {
+      "relation": "references",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "src/wrapastac/providers/__init__.py",
+      "source_location": "__init__.py:10",
+      "weight": 1.0,
+      "_src": "providers___init___resolve_provider",
+      "_tgt": "element84_element84",
+      "source": "element84_element84",
+      "target": "providers___init___resolve_provider"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
       "source_file": "README.md",
-      "source_location": "line 18",
-      "weight": 0.7,
-      "_src": "just_command_runner",
-      "_tgt": "wrapastac_sdk_concept",
-      "source": "wrapastac_sdk_concept",
-      "target": "just_command_runner"
+      "source_location": "README.md:3",
+      "weight": 1.0,
+      "_src": "readme_wrapastac",
+      "_tgt": "readme_stac_catalog",
+      "source": "readme_wrapastac",
+      "target": "readme_stac_catalog"
     }
   ],
   "hyperedges": [
-    {
-      "id": "stac_search_load_pipeline",
-      "label": "STAC Search-to-Load Pipeline",
-      "nodes": [
-        "staccollection_class",
-        "search_method_stac",
-        "itemcollection_class",
-        "load_method"
-      ],
-      "relation": "participate_in",
-      "confidence": "EXTRACTED",
-      "confidence_score": 0.95,
-      "source_file": "src/wrapastac/_base.py"
-    },
     {
       "id": "geometry_utm_projection_flow",
       "label": "Geometry UTM Projection Flow",
@@ -8896,20 +8956,6 @@
       "confidence": "EXTRACTED",
       "confidence_score": 0.95,
       "source_file": "src/wrapastac/geometry/__init__.py"
-    },
-    {
-      "id": "provider_resolution_pattern",
-      "label": "Provider Resolution Pattern",
-      "nodes": [
-        "provider_abc",
-        "element84_provider",
-        "planetarycomputer_provider",
-        "resolve_provider_func"
-      ],
-      "relation": "participate_in",
-      "confidence": "EXTRACTED",
-      "confidence_score": 0.95,
-      "source_file": "src/wrapastac/providers/__init__.py"
     },
     {
       "id": "static_lulc_lidar_collections",
@@ -8939,17 +8985,31 @@
       "source_file": "src/wrapastac/collections/hls.py"
     },
     {
-      "id": "cloud_filter_collections",
-      "label": "Collections implementing eo:cloud_cover query filter",
+      "id": "stac_provider_implementations",
+      "label": "STAC Provider Implementations",
       "nodes": [
-        "sentinel2_class",
-        "landsat_class",
-        "cloud_cover_filter_pattern"
+        "providers__base_provider",
+        "element84_element84",
+        "copernicus_dataspace_copernicusdataspaceecosystem"
       ],
       "relation": "implement",
       "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "src/wrapastac/collections/sentinel2.py"
+      "confidence_score": 0.95,
+      "source_file": "src/wrapastac/providers/_base.py"
+    },
+    {
+      "id": "collection_hierarchy",
+      "label": "Collection Class Hierarchy",
+      "nodes": [
+        "_base_collectionbase",
+        "_base_staccollection",
+        "_base_staticstaccollection",
+        "sentinel2_sentinel2"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 0.95,
+      "source_file": "src/wrapastac/_base.py"
     }
   ]
 }
