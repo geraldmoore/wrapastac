@@ -27,5 +27,15 @@ class Provider(ABC):
         """Optional HTTP headers to include with every request."""
         return None
 
+    @property
+    def use_cql2(self) -> bool:
+        """Whether this provider prefers CQL2-JSON for STAC query filters.
+
+        When True, search() sends ``filter`` + ``filter_lang="cql2-json"`` instead of
+        the legacy ``query`` dict. Override to True on providers whose STAC API
+        implements the OGC API — Features Part 3 filter conformance class.
+        """
+        return False
+
     def __repr__(self) -> str:
         return f"{type(self).__name__}(api_url={self.api_url!r})"

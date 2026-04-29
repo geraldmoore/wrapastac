@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 from collections import Counter
 from datetime import date, datetime
-from typing import Any, ClassVar
+from typing import Any, ClassVar, Literal
 
 import numpy as np
 import odc.stac
@@ -22,6 +22,29 @@ from wrapastac.providers._base import Provider
 configure_rio(cloud_defaults=True)
 
 logger = logging.getLogger(__name__)
+
+_CQL2_OPS: dict[str, str] = {
+    "lt": "lt",
+    "lte": "lte",
+    "gt": "gt",
+    "gte": "gte",
+    "eq": "=",
+    "neq": "<>",
+}
+
+
+def _query_to_cql2(query: dict) -> dict:
+    """Convert a legacy STAC query dict to a CQL2-JSON filter expression.
+
+    ``{"eo:cloud_cover": {"lt": 20}}`` → ``{"op": "lt", "args": [{"property": "eo:cloud_cover"}, 20]}``
+    Multiple conditions are wrapped in an ``"and"`` node.
+    """
+    args = []
+    for prop, conditions in query.items():
+        for op, value in conditions.items():
+            args.append({"op": _CQL2_OPS.get(op, op), "args": [{"property": prop}, value]})
+    return args[0] if len(args) == 1 else {"op": "and", "args": args}
+
 
 _REQUIRED_ATTRS = (
     "collection_id",
@@ -57,7 +80,11 @@ class _CollectionBase:
 
     def _open_client(self) -> Client:
         try:
-            return Client.open(self._provider.api_url, modifier=self._provider.modifier)
+            return Client.open(
+                self._provider.api_url,
+                modifier=self._provider.modifier,
+                headers=self._provider.headers,
+            )
         except Exception as e:
             raise ConnectionError(
                 f"Failed to connect to STAC API at {self._provider.api_url}"
@@ -127,6 +154,7 @@ class _CollectionBase:
         nodata: float | int | None = None,
         resampling: str = "nearest",
         groupby: str | None = None,
+        chunks: dict[str, int | Literal["auto"]] | None = None,
     ) -> xarray.Dataset:
         """Load STAC items into a clipped, band-renamed xarray Dataset.
 
@@ -140,6 +168,9 @@ class _CollectionBase:
             nodata: Fill value for missing pixels. Defaults to collection default.
             resampling: Resampling method name understood by rasterio. Defaults to "nearest".
             groupby: odc-stac groupby argument (e.g. "solar_day"). Defaults to None.
+            chunks: Chunking configuration passed to odc-stac. If None, no chunking (eager loading).
+                Use {"x": 1024, "y": 1024} for 1024x1024 pixel chunks, or adjust based on your
+                compute environment.
 
         Returns:
             xarray.Dataset with one variable per band, named using common band names.
@@ -184,7 +215,7 @@ class _CollectionBase:
             fail_on_error=False,
             groupby=groupby,
             nodata=nodata_val,
-            chunks={"x": 1024, "y": 1024},
+            chunks=chunks,
             anchor="floating",
         )
 
@@ -243,14 +274,22 @@ class STACCollection(_CollectionBase):
             ItemCollection of matching STAC items, sorted by acquisition date.
         """
         client = self._open_client()
-        query = self._build_query(cloud_cover=cloud_cover)
         search_params: dict = {
             "collections": [self.collection_id],
             "intersects": geometry.__geo_interface__,
             "datetime": f"{start}/{end}",
         }
+        query = self._build_query(cloud_cover=cloud_cover)
         if query:
-            search_params["query"] = query
+            if self._provider.use_cql2:
+                # Try CQL2 first, fall back to legacy query if server doesn't support it
+                try:
+                    search_params["filter"] = _query_to_cql2(query)
+                    search_params["filter_lang"] = "cql2-json"
+                except Exception:
+                    search_params["query"] = query
+            else:
+                search_params["query"] = query
 
         items = self._paginate(client, **search_params)
         return ItemCollection(items, large_result_threshold=self._large_result_threshold)

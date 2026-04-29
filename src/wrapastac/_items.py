@@ -79,6 +79,7 @@ class ItemCollection:
         cloud_cover_lt: float | None = None,
         before: str | datetime | None = None,
         after: str | datetime | None = None,
+        tile: str | None = None,
     ) -> ItemCollection:
         """Return a new ItemCollection with items matching all given criteria.
 
@@ -86,6 +87,9 @@ class ItemCollection:
             cloud_cover_lt: Keep only items with cloud cover strictly below this value.
             before: Keep only items acquired strictly before this date (YYYY-MM-DD or datetime).
             after: Keep only items acquired on or after this date (YYYY-MM-DD or datetime).
+            tile: Keep only items belonging to this tile. Matches against ``s2:mgrs_tile``
+                (e.g. ``"32UMF"``), ``grid:code`` (e.g. ``"MGRS-32UMF"``), or Landsat
+                path/row expressed as ``"path/row"`` (e.g. ``"200/30"``).
         """
         items = list(self._items)
 
@@ -112,7 +116,52 @@ class ItemCollection:
                 if item.datetime and item.datetime.replace(tzinfo=None) >= floor
             ]
 
+        if tile is not None:
+            items = [item for item in items if _matches_tile(item, tile)]
+
         return ItemCollection(items, large_result_threshold=_LARGE_RESULT_DEFAULT)
+
+    def sort_by_cloud_cover(self) -> ItemCollection:
+        """Return a new ItemCollection sorted by ascending cloud cover.
+
+        Items with no cloud cover data (None) are placed last.
+        """
+
+        def _key(item: pystac.Item) -> float:
+            cc = item.properties.get("eo:cloud_cover")
+            return cc if cc is not None else float("inf")
+
+        return ItemCollection(
+            sorted(self._items, key=_key),
+            large_result_threshold=_LARGE_RESULT_DEFAULT,
+        )
+
+    def unique_dates(self) -> ItemCollection:
+        """Return one item per calendar date, keeping the least cloudy item for each date.
+
+        When multiple items share the same acquisition date, the item with the lowest
+        ``eo:cloud_cover`` is kept. If no items have cloud cover data, the first item
+        for that date is kept. The result is sorted ascending by date.
+        """
+        by_date: dict[str, list[pystac.Item]] = {}
+        for item in self._items:
+            if item.datetime:
+                key = item.datetime.strftime("%Y-%m-%d")
+                by_date.setdefault(key, []).append(item)
+
+        result: list[pystac.Item] = []
+        for date_key in sorted(by_date):
+            candidates = by_date[date_key]
+            best = min(
+                candidates,
+                key=lambda i: (
+                    i.properties.get("eo:cloud_cover") is None,
+                    i.properties.get("eo:cloud_cover") or float("inf"),
+                ),
+            )
+            result.append(best)
+
+        return ItemCollection(result, large_result_threshold=_LARGE_RESULT_DEFAULT)
 
     def _assert_non_empty(self) -> None:
         if not self._items:
@@ -126,3 +175,20 @@ def _parse_dt(value: str | datetime) -> datetime:
     if isinstance(value, datetime):
         return value.replace(tzinfo=None)
     return datetime.fromisoformat(value)
+
+
+def _matches_tile(item: pystac.Item, tile: str) -> bool:
+    props = item.properties
+    if props.get("s2:mgrs_tile") == tile:
+        return True
+    grid_code = props.get("grid:code", "")
+    if grid_code == tile or grid_code.endswith(f"-{tile}"):
+        return True
+    if "/" in tile:
+        path_str, row_str = tile.split("/", 1)
+        if (
+            str(props.get("landsat:wrs_path", "")) == path_str
+            and str(props.get("landsat:wrs_row", "")) == row_str
+        ):
+            return True
+    return False

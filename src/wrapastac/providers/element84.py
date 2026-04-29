@@ -12,3 +12,7 @@ class Element84(Provider):
     @property
     def api_url(self) -> str:
         return "https://earth-search.aws.element84.com/v1"
+
+    @property
+    def use_cql2(self) -> bool:
+        return True
