@@ -93,7 +93,7 @@ class _CollectionBase:
                     common_to_asset[common_name] = asset_key
 
         for common_name, asset_key in self._fallback_band_mapping.items():
-            if common_name not in common_to_asset:
+            if common_name not in common_to_asset and asset_key in first_item.assets:
                 common_to_asset[common_name] = asset_key
 
         asset_keys: list[str] = []
