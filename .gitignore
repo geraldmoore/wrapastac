@@ -15,7 +15,6 @@
 /.pdm-build/
 /htmlcov/
 /site/
-uv.lock
 
 # cache
 .cache/
@@ -25,3 +24,6 @@ __pycache__/
 
 # env — use .env.example to document required variables
 .env
+
+# Notebooks
+*.ipynb
