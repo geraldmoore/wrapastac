@@ -40,11 +40,76 @@ Use `Element84` as an alternative provider:
 ```python
 from wrapastac import Sentinel2, Element84
 
-s2 = Sentinel2(provider=Element84())  # or provider="element84"
+s2 = Sentinel2(provider=Element84())  # or simply use provider="element84"
 items = s2.search(geometry=geom, start="2024-06-01", end="2024-08-31", cloud_cover=20)
 ```
 
 Other available collections: `Sentinel1`, `Landsat`, `HLSSentinel`, `HLSLandsat`, `CopDEM30`, `ESRILULC`, `RZLULC`, `LidarEngland`.
+
+## Custom providers
+
+Any private or custom STAC endpoint can be used by subclassing `Provider` and passing an instance to a collection.
+
+The only required attribute is `api_url`. The others are optional:
+
+| Property | Type | Purpose |
+| --- | --- | --- |
+| `api_url` | `str` | Root URL of the STAC API (**required**) |
+| `headers` | `dict[str, str] \| None` | Static HTTP headers sent with every request (e.g. an API key) |
+| `modifier` | `Callable \| None` | Callable passed to `pystac_client` to sign or modify requests dynamically |
+| `use_cql2` | `bool` | Set to `True` if the endpoint supports the OGC CQL2-JSON filter extension (default: `False`) |
+
+**Minimal example — unauthenticated endpoint:**
+
+```python
+from wrapastac.providers import Provider
+from wrapastac import Sentinel2
+
+class MySTAC(Provider):
+    @property
+    def api_url(self) -> str:
+        return "https://my-stac.example.com/v1"
+
+s2 = Sentinel2(provider=MySTAC())
+```
+
+**With a static API key header:**
+
+```python
+class MySTAC(Provider):
+    def __init__(self, api_key: str) -> None:
+        self._api_key = api_key
+
+    @property
+    def api_url(self) -> str:
+        return "https://my-stac.example.com/v1"
+
+    @property
+    def headers(self) -> dict[str, str]:
+        return {"X-API-Key": self._api_key}
+
+s2 = Sentinel2(provider=MySTAC(api_key="secret"))
+```
+
+**With a dynamic bearer token (using `modifier`):**
+
+```python
+from collections.abc import Callable
+
+class MySTAC(Provider):
+    @property
+    def api_url(self) -> str:
+        return "https://my-stac.example.com/v1"
+
+    @property
+    def modifier(self) -> Callable:
+        def sign(request):
+            request.headers["Authorization"] = f"Bearer {get_token()}"
+            return request
+        return sign
+```
+
+The `modifier` callable receives a `PreparedRequest`-like object and must return it. Use `headers` for static credentials and `modifier` when tokens need to be fetched or refreshed at request time.
 
 ## Development
 
