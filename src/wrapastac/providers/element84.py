@@ -15,4 +15,4 @@ class Element84(Provider):
 
     @property
     def use_cql2(self) -> bool:
-        return True
+        return False
