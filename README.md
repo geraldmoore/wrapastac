@@ -14,6 +14,38 @@ With [`uv`](https://docs.astral.sh/uv/):
 uv sync
 ```
 
+## Usage
+
+Search for Sentinel-2 imagery over a location and load it as an `xarray.Dataset`:
+
+```python
+from wrapastac import Sentinel2
+from wrapastac.geometry import point_to_bbox
+
+# Define an area of interest (5 km buffer around a point)
+geom = point_to_bbox(lat=51.5, lon=-0.1, buffer_m=5000)
+
+# Search for scenes with less than 20% cloud cover
+s2 = Sentinel2(provider="planetary_computer")
+items = s2.search(geometry=geom, start="2024-06-01", end="2024-08-31", cloud_cover=20)
+print(items)  # ItemCollection(14 items)
+print(items.dates)  # ['2024-06-03', '2024-06-08', ...]
+
+# Load selected bands as an xarray Dataset
+ds = s2.load(items, geometry=geom, bands=["red", "green", "blue", "nir"])
+```
+
+Use `Element84` as an alternative provider:
+
+```python
+from wrapastac import Sentinel2, Element84
+
+s2 = Sentinel2(provider=Element84())
+items = s2.search(geometry=geom, start="2024-06-01", end="2024-08-31", cloud_cover=20)
+```
+
+Other available collections: `Sentinel1`, `Landsat`, `HLSSentinel`, `HLSLandsat`, `CopDEM30`, `ESRILULC`, `RZLULC`, `LidarEngland`.
+
 ## Development
 
 This project uses [`just`](https://github.com/casey/just) as a command runner. Run `just` to see all 
