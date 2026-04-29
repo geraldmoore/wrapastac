@@ -46,70 +46,63 @@ items = s2.search(geometry=geom, start="2024-06-01", end="2024-08-31", cloud_cov
 
 Other available collections: `Sentinel1`, `Landsat`, `HLSSentinel`, `HLSLandsat`, `CopDEM30`, `ESRILULC`, `RZLULC`, `LidarEngland`.
 
-## Custom providers
+## Adding a new satellite source
 
-Any private or custom STAC endpoint can be used by subclassing `Provider` and passing an instance to a collection.
+Subclass `STACCollection` for time-varying data (optical, SAR) or `StaticSTACCollection` for static data (DEMs, land cover). Define the five required class attributes and you're done:
 
-The only required attribute is `api_url`. The others are optional:
+```python
+from typing import ClassVar
+from wrapastac._base import STACCollection
 
-| Property | Type | Purpose |
+class MyOptical(STACCollection):
+    collection_id: ClassVar[str] = "my-collection-id"   # STAC collection name
+    default_resolution: ClassVar[int] = 10               # metres
+    default_dtype: ClassVar[str] = "uint16"
+    default_nodata: ClassVar[int] = 0
+    default_bands: ClassVar[list[str]] = ["red", "green", "blue", "nir"]
+
+col = MyOptical(provider="element84")
+items = col.search(geometry=geom, start="2024-01-01", end="2024-06-01")
+ds = col.load(items, geometry=geom)
+```
+
+**Cloud cover filtering** — override `_build_query` to enable the `cloud_cover` parameter in `.search()`:
+
+```python
+def _build_query(self, cloud_cover: int | None) -> dict | None:
+    if cloud_cover is None:
+        return None
+    return {"eo:cloud_cover": {"lt": cloud_cover}}
+```
+
+**Band name aliases** — if the STAC asset keys don't match `eo:common_name` values, add a `_fallback_band_mapping` to map friendly names to the actual asset keys:
+
+```python
+_fallback_band_mapping: ClassVar[dict[str, str]] = {"elevation": "data", "ndvi": "NDVI"}
+```
+
+**Static collections** (no time dimension — DEMs, LULC, etc.) — use `StaticSTACCollection` instead. Its `.search()` takes only a geometry:
+
+```python
+from wrapastac._base import StaticSTACCollection
+
+class MyDEM(StaticSTACCollection):
+    collection_id: ClassVar[str] = "my-dem"
+    default_resolution: ClassVar[int] = 30
+    default_dtype: ClassVar[str] = "float32"
+    default_nodata: ClassVar[float] = -9999.0
+    default_bands: ClassVar[list[str]] = ["elevation"]
+    _fallback_band_mapping: ClassVar[dict[str, str]] = {"elevation": "data"}
+
+items = MyDEM(provider="planetary_computer").search(geometry=geom)
+```
+
+Two optional flags control reprojection behaviour for static collections:
+
+| Flag | Default | Effect |
 | --- | --- | --- |
-| `api_url` | `str` | Root URL of the STAC API (**required**) |
-| `headers` | `dict[str, str] \| None` | Static HTTP headers sent with every request (e.g. an API key) |
-| `modifier` | `Callable \| None` | Callable passed to `pystac_client` to sign or modify requests dynamically |
-| `use_cql2` | `bool` | Set to `True` if the endpoint supports the OGC CQL2-JSON filter extension (default: `False`) |
-
-**Minimal example — unauthenticated endpoint:**
-
-```python
-from wrapastac.providers import Provider
-from wrapastac import Sentinel2
-
-class MySTAC(Provider):
-    @property
-    def api_url(self) -> str:
-        return "https://my-stac.example.com/v1"
-
-s2 = Sentinel2(provider=MySTAC())
-```
-
-**With a static API key header:**
-
-```python
-class MySTAC(Provider):
-    def __init__(self, api_key: str) -> None:
-        self._api_key = api_key
-
-    @property
-    def api_url(self) -> str:
-        return "https://my-stac.example.com/v1"
-
-    @property
-    def headers(self) -> dict[str, str]:
-        return {"X-API-Key": self._api_key}
-
-s2 = Sentinel2(provider=MySTAC(api_key="secret"))
-```
-
-**With a dynamic bearer token (using `modifier`):**
-
-```python
-from collections.abc import Callable
-
-class MySTAC(Provider):
-    @property
-    def api_url(self) -> str:
-        return "https://my-stac.example.com/v1"
-
-    @property
-    def modifier(self) -> Callable:
-        def sign(request):
-            request.headers["Authorization"] = f"Bearer {get_token()}"
-            return request
-        return sign
-```
-
-The `modifier` callable receives a `PreparedRequest`-like object and must return it. Use `headers` for static credentials and `modifier` when tokens need to be fetched or refreshed at request time.
+| `reproject_wgs84_to_utm` | `True` | Re-projects WGS84 assets to UTM for accurate metre-scale clipping |
+| `use_native_resolution` | `False` | Ignores `default_resolution` and loads at the COG's native pixel size |
 
 ## Development
 
