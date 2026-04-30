@@ -33,4 +33,3 @@ class LidarEngland(StaticSTACCollection):
     default_dtype: ClassVar[str] = "float32"
     default_nodata: ClassVar[float] = -32767.0
     default_bands: ClassVar[list[str]] = ["data"]
-    _fallback_band_mapping: ClassVar[dict[str, str]] = {"data": "data"}

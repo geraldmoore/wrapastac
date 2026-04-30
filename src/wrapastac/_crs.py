@@ -7,6 +7,8 @@ from shapely.geometry.base import BaseGeometry
 from shapely.ops import transform
 
 WGS84_EPSG = 4326
+# pyproj.CRS(4326) uses lat/lon axis order by default, but Shapely expects (lon, lat).
+# The proj4 string forces lon/lat order, matching Shapely's coordinate convention.
 _WGS84_PROJ4 = "+proj=longlat +datum=WGS84 +no_defs +type=crs"
 
 

@@ -23,6 +23,9 @@ configure_rio(cloud_defaults=True)
 
 logger = logging.getLogger(__name__)
 
+# Sentinel so load() can distinguish "caller passed None (eager)" from "caller didn't pass chunks".
+_CHUNKS_UNSET: object = object()
+
 _CQL2_OPS: dict[str, str] = {
     "lt": "lt",
     "lte": "lte",
@@ -69,6 +72,18 @@ class _CollectionBase:
     reproject_wgs84_to_utm: ClassVar[bool] = True
     use_native_resolution: ClassVar[bool] = False
 
+    def __init_subclass__(cls, **kwargs: Any) -> None:
+        super().__init_subclass__(**kwargs)
+        # Only validate concrete collections — those that declare collection_id in their own body.
+        # Intermediate base classes (STACCollection, StaticSTACCollection) are skipped.
+        if "collection_id" in cls.__dict__:
+            missing = [attr for attr in _REQUIRED_ATTRS if not hasattr(cls, attr)]
+            if missing:
+                raise TypeError(
+                    f"{cls.__name__} must define class attributes: {missing!r}. "
+                    "See STACCollection or StaticSTACCollection for examples."
+                )
+
     def __init__(self, provider: str | Provider) -> None:
         for attr in _REQUIRED_ATTRS:
             if not hasattr(self, attr):
@@ -78,17 +93,15 @@ class _CollectionBase:
                 )
         self._provider: Provider = resolve_provider(provider)
 
+    def __repr__(self) -> str:
+        return f"{type(self).__name__}(provider={self._provider!r})"
+
     def _open_client(self) -> Client:
-        try:
-            return Client.open(
-                self._provider.api_url,
-                modifier=self._provider.modifier,
-                headers=self._provider.headers,
-            )
-        except Exception as e:
-            raise ConnectionError(
-                f"Failed to connect to STAC API at {self._provider.api_url}"
-            ) from e
+        return Client.open(
+            self._provider.api_url,
+            modifier=self._provider.modifier,
+            headers=self._provider.headers,
+        )
 
     def _paginate(self, client: Client, **search_params: Any) -> list[pystac.Item]:
         search = client.search(**search_params)
@@ -142,7 +155,17 @@ class _CollectionBase:
                 if isinstance(code, str) and code.upper().startswith("EPSG:"):
                     code = code.split(":")[-1]
                 epsg_values.append(int(code))
-        return Counter(epsg_values).most_common(1)[0][0] if epsg_values else WGS84_EPSG
+        if not epsg_values:
+            return WGS84_EPSG
+        counts = Counter(epsg_values)
+        most_common_epsg = counts.most_common(1)[0][0]
+        if len(counts) > 1:
+            logger.warning(
+                "Items span multiple EPSG codes %s — using the most common (EPSG:%d).",
+                sorted(counts),
+                most_common_epsg,
+            )
+        return most_common_epsg
 
     def load(
         self,
@@ -154,7 +177,7 @@ class _CollectionBase:
         nodata: float | int | None = None,
         resampling: str = "nearest",
         groupby: str | None = None,
-        chunks: dict[str, int | Literal["auto"]] | None = {"x": 1024, "y": 1024},
+        chunks: dict[str, int | Literal["auto"]] | None = _CHUNKS_UNSET,  # type: ignore[assignment]
     ) -> xarray.Dataset:
         """Load STAC items into a clipped, band-renamed xarray Dataset.
 
@@ -164,18 +187,23 @@ class _CollectionBase:
                 is applied and the full item extents are loaded.
             bands: Common band names to load. Defaults to the collection's default_bands.
             resolution: Output resolution in metres. Defaults to the collection default.
+                Ignored when the collection sets ``use_native_resolution = True``.
             dtype: Output NumPy dtype string (e.g. "float32"). Defaults to collection default.
             nodata: Fill value for missing pixels. Defaults to collection default.
             resampling: Resampling method name understood by rasterio. Defaults to "nearest".
             groupby: odc-stac groupby argument (e.g. "solar_day"). Defaults to None.
-            chunks: Chunking configuration passed to odc-stac. If None, no chunking (eager loading).
-                Use {"x": 1024, "y": 1024} for 1024x1024 pixel chunks, or adjust based on your
-                compute environment.
+            chunks: Chunking configuration passed to odc-stac. Defaults to
+                ``{"x": 1024, "y": 1024}`` (Dask chunked loading). Pass ``None`` for
+                eager (non-chunked) loading.
 
         Returns:
             xarray.Dataset with one variable per band, named using common band names.
         """
+        if chunks is _CHUNKS_UNSET:
+            chunks = {"x": 1024, "y": 1024}
+
         items._assert_non_empty()
+        item_list = list(items)
 
         bands = bands or list(self.default_bands)
         resolution = resolution or self.default_resolution
@@ -186,7 +214,7 @@ class _CollectionBase:
 
         asset_keys, reverse_mapping = self._resolve_bands(items, bands)
 
-        native_epsg = self._get_epsg(list(items))
+        native_epsg = self._get_epsg(item_list)
         epsg = native_epsg
 
         if native_epsg == WGS84_EPSG and geometry is not None and self.reproject_wgs84_to_utm:
@@ -198,6 +226,13 @@ class _CollectionBase:
             )
 
         crs = None if epsg == native_epsg else f"EPSG:{epsg}"
+
+        if self.use_native_resolution and resolution != self.default_resolution:
+            logger.warning(
+                "%s uses native COG resolution — ignoring the supplied resolution=%d.",
+                type(self).__name__,
+                resolution,
+            )
         load_resolution = None if self.use_native_resolution else resolution
 
         clip_geom_proj: BaseGeometry | None = None
@@ -205,7 +240,7 @@ class _CollectionBase:
             clip_geom_proj = geometry_from_epsg_to_epsg(geometry, WGS84_EPSG, epsg)
 
         out = odc.stac.load(
-            list(items),
+            item_list,
             asset_keys,
             crs=crs,
             resolution=load_resolution,
@@ -222,7 +257,7 @@ class _CollectionBase:
         if clip_geom_proj is not None:
             out = out.rio.clip([clip_geom_proj])
 
-        out = self._maybe_harmonise(out, list(items))
+        out = self._maybe_harmonise(out, item_list)
 
         if isinstance(out, xarray.DataArray):
             out = out.to_dataset(dim="band")
@@ -282,12 +317,8 @@ class STACCollection(_CollectionBase):
         query = self._build_query(cloud_cover=cloud_cover)
         if query:
             if self._provider.use_cql2:
-                # Try CQL2 first, fall back to legacy query if server doesn't support it
-                try:
-                    search_params["filter"] = _query_to_cql2(query)
-                    search_params["filter_lang"] = "cql2-json"
-                except Exception:
-                    search_params["query"] = query
+                search_params["filter"] = _query_to_cql2(query)
+                search_params["filter_lang"] = "cql2-json"
             else:
                 search_params["query"] = query
 

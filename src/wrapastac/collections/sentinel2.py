@@ -6,7 +6,7 @@ import pystac
 import xarray
 
 from wrapastac._base import STACCollection
-from wrapastac._harmonise import maybe_harmonise_s2
+from wrapastac._harmonise import harmonise_s2
 
 
 class Sentinel2(STACCollection):
@@ -32,4 +32,4 @@ class Sentinel2(STACCollection):
         return {"eo:cloud_cover": {"lt": cloud_cover}}
 
     def _maybe_harmonise(self, ds: xarray.Dataset, items: list[pystac.Item]) -> xarray.Dataset:
-        return maybe_harmonise_s2(ds, items)
+        return harmonise_s2(ds, items)

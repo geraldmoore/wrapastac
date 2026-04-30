@@ -28,6 +28,7 @@ class ItemCollection:
         large_result_threshold: int = _LARGE_RESULT_DEFAULT,
     ) -> None:
         self._items = items
+        self._large_result_threshold = large_result_threshold
         if len(items) > large_result_threshold:
             logger.warning(
                 "Search returned %d items — consider narrowing your date range, "
@@ -119,7 +120,7 @@ class ItemCollection:
         if tile is not None:
             items = [item for item in items if _matches_tile(item, tile)]
 
-        return ItemCollection(items, large_result_threshold=_LARGE_RESULT_DEFAULT)
+        return ItemCollection(items, large_result_threshold=self._large_result_threshold)
 
     def sort_by_cloud_cover(self) -> ItemCollection:
         """Return a new ItemCollection sorted by ascending cloud cover.
@@ -133,7 +134,7 @@ class ItemCollection:
 
         return ItemCollection(
             sorted(self._items, key=_key),
-            large_result_threshold=_LARGE_RESULT_DEFAULT,
+            large_result_threshold=self._large_result_threshold,
         )
 
     def unique_dates(self) -> ItemCollection:
@@ -161,7 +162,7 @@ class ItemCollection:
             )
             result.append(best)
 
-        return ItemCollection(result, large_result_threshold=_LARGE_RESULT_DEFAULT)
+        return ItemCollection(result, large_result_threshold=self._large_result_threshold)
 
     def _assert_non_empty(self) -> None:
         if not self._items:

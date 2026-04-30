@@ -12,22 +12,6 @@ _REGISTRY: dict[str, Provider] = {
 }
 
 
-def get_cdse_provider(
-    client_id: str | None = None,
-    client_secret: str | None = None,
-) -> CopernicusDataSpaceEcosystem:
-    """Create a Copernicus Data Space Ecosystem provider with OAuth2 credentials.
-
-    Args:
-        client_id: OAuth2 client ID. If not provided, reads from ``CDSE_CLIENT_ID`` env var.
-        client_secret: OAuth2 client secret. If not provided, reads from ``CDSE_CLIENT_SECRET`` env var.
-
-    Returns:
-        Configured CopernicusDataSpaceEcosystem provider instance.
-    """
-    return CopernicusDataSpaceEcosystem(client_id=client_id, client_secret=client_secret)
-
-
 def resolve_provider(provider: str | Provider) -> Provider:
     """Resolve a provider name string or Provider instance to a Provider object.
 
@@ -54,6 +38,5 @@ __all__ = [
     "Element84",
     "PlanetaryComputer",
     "CopernicusDataSpaceEcosystem",
-    "get_cdse_provider",
     "resolve_provider",
 ]

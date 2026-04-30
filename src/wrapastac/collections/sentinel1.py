@@ -19,4 +19,3 @@ class Sentinel1(STACCollection):
     default_dtype: ClassVar[str] = "float32"
     default_nodata: ClassVar[float] = -32768.0
     default_bands: ClassVar[list[str]] = ["vv", "vh"]
-    _fallback_band_mapping: ClassVar[dict[str, str]] = {"vv": "vv", "vh": "vh"}

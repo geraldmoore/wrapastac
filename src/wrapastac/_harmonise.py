@@ -16,7 +16,7 @@ _OFFSET = 1000
 _NON_SPECTRAL = frozenset({"scl", "SCL", "qa_pixel", "QA"})
 
 
-def maybe_harmonise_s2(ds: xarray.Dataset, items: list[pystac.Item]) -> xarray.Dataset:
+def harmonise_s2(ds: xarray.Dataset, items: list[pystac.Item]) -> xarray.Dataset:
     """Apply S2 processing baseline harmonisation when items span the 2022-01-25 cutoff.
 
     Before that date ESA applied a -1000 offset to reflectance values. Adding +1000

@@ -18,7 +18,6 @@ class ESRILULC(StaticSTACCollection):
     default_dtype: ClassVar[str] = "uint8"
     default_nodata: ClassVar[int] = 0
     default_bands: ClassVar[list[str]] = ["data"]
-    _fallback_band_mapping: ClassVar[dict[str, str]] = {"data": "data"}
 
 
 class RZLULC(StaticSTACCollection):

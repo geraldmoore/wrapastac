@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from shapely import BufferCapStyle
 from shapely.geometry import Point, box
 from shapely.geometry.base import BaseGeometry
 
@@ -38,7 +39,7 @@ def point_to_bbox(lat: float, lon: float, buffer_m: float) -> BaseGeometry:
     utm_epsg = get_utm_epsg(lon=lon, lat=lat)
     point_wgs84 = Point(lon, lat)
     point_utm = geometry_from_epsg_to_epsg(point_wgs84, WGS84_EPSG, utm_epsg)
-    bbox_utm = point_utm.buffer(buffer_m, cap_style=3)  # cap_style=3 → square
+    bbox_utm = point_utm.buffer(buffer_m, cap_style=BufferCapStyle.square)
     return geometry_from_epsg_to_epsg(bbox_utm, utm_epsg, WGS84_EPSG)
 
 
@@ -75,16 +76,8 @@ def from_geodataframe(gdf: gpd.GeoDataFrame) -> BaseGeometry:
         Shapely geometry in WGS84 representing the union of all features.
 
     Raises:
-        ImportError: If geopandas is not installed.
         ValueError: If the GeoDataFrame is empty.
     """
-    try:
-        import geopandas as gpd  # noqa: F401
-    except ImportError as e:
-        raise ImportError(
-            "geopandas is required for from_geodataframe(). Install it with: pip install geopandas"
-        ) from e
-
     if gdf.empty:
         raise ValueError("GeoDataFrame is empty — cannot construct a geometry.")
 
