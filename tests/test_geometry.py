@@ -1,6 +1,5 @@
 """Tests for geometry utility functions."""
 
-
 from shapely.geometry import Point
 
 from wrapastac._crs import get_utm_epsg

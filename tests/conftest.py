@@ -1,6 +1,5 @@
 """Shared fixtures for wrapastac tests."""
 
-
 from datetime import datetime
 
 import pystac
@@ -49,4 +48,3 @@ def make_item(
             item.add_asset(key, _make_asset(common_name, key))
 
     return item
-
