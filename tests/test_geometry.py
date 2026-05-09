@@ -1,5 +1,3 @@
-"""Tests for geometry utility functions."""
-
 from shapely.geometry import Point
 
 from wrapastac._crs import get_utm_epsg
@@ -18,12 +16,11 @@ def test_point_to_bbox_contains_origin():
 
 
 def test_point_to_bbox_approximate_size():
-    """A 1000 m buffer should produce a bbox roughly 2 km across in degrees."""
     geom = point_to_bbox(lat=51.5, lon=-0.1, buffer_m=1000)
     bounds = geom.bounds  # (min_lon, min_lat, max_lon, max_lat)
     lat_span_deg = bounds[3] - bounds[1]
     lon_span_deg = bounds[2] - bounds[0]
-    # 2 km at 51.5°N latitude ≈ 0.018° lat, ≈ 0.029° lon — check order of magnitude
+    # 2 km at 51.5°N latitude ≈ 0.018° lat, ≈ 0.029° lon
     assert 0.01 < lat_span_deg < 0.03
     assert 0.01 < lon_span_deg < 0.05
 
@@ -46,7 +43,6 @@ def test_bbox_helper():
 
 
 def test_point_to_bbox_southern_hemisphere():
-    """UTM zone detection should work correctly in the southern hemisphere."""
     geom = point_to_bbox(lat=-33.8, lon=151.2, buffer_m=2000)
     assert geom.contains(Point(151.2, -33.8))
 

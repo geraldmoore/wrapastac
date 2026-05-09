@@ -22,7 +22,7 @@
 .ruff_cache/
 __pycache__/
 
-# env — use .env.example to document required variables
+# env
 .env
 
 # Notebooks

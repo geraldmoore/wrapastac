@@ -181,7 +181,7 @@ class _CollectionBase:
 
         if self.use_native_resolution and resolution != self.default_resolution:
             logger.warning(
-                "%s uses native COG resolution — ignoring the supplied resolution=%d.",
+                "%s uses native COG resolution, ignoring the supplied resolution=%d.",
                 type(self).__name__,
                 resolution,
             )

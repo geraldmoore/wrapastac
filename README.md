@@ -53,8 +53,8 @@ from typing import ClassVar
 from wrapastac._base import STACCollection
 
 class MyOptical(STACCollection):
-    collection_id: ClassVar[str] = "my-collection-id"   # STAC collection name
-    default_resolution: ClassVar[int] = 10               # metres
+    collection_id: ClassVar[str] = "my-collection-id"  # STAC collection name
+    default_resolution: ClassVar[int] = 10  # metres
     default_dtype: ClassVar[str] = "uint16"
     default_nodata: ClassVar[int] = 0
     default_bands: ClassVar[list[str]] = ["red", "green", "blue", "nir"]
@@ -64,7 +64,8 @@ items = col.search(geometry=geom, start="2024-01-01", end="2024-06-01")
 ds = col.load(items, geometry=geom)
 ```
 
-**Cloud cover filtering** — override `_build_query` to enable the `cloud_cover` parameter in `.search()`:
+**Cloud cover filtering**
+Override `_build_query` to enable the `cloud_cover` parameter in `.search()`:
 
 ```python
 def _build_query(self, cloud_cover: int | None) -> dict | None:
@@ -73,13 +74,15 @@ def _build_query(self, cloud_cover: int | None) -> dict | None:
     return {"eo:cloud_cover": {"lt": cloud_cover}}
 ```
 
-**Band name aliases** — if the STAC asset keys don't match `eo:common_name` values, add a `_fallback_band_mapping` to map friendly names to the actual asset keys:
+**Band name aliases**
+If the STAC asset keys don't match `eo:common_name` values, add a `_fallback_band_mapping` to map friendly names to the actual asset keys:
 
 ```python
 _fallback_band_mapping: ClassVar[dict[str, str]] = {"elevation": "data", "ndvi": "NDVI"}
 ```
 
-**Static collections** (no time dimension — DEMs, LULC, etc.) — use `StaticSTACCollection` instead. Its `.search()` takes only a geometry:
+**Static collections**
+Use `StaticSTACCollection` instead. Its `.search()` takes only a geometry:
 
 ```python
 from wrapastac._base import StaticSTACCollection
@@ -117,7 +120,8 @@ class MyProvider(Provider):
 col = MyOptical(provider=MyProvider())
 ```
 
-**Static API key** — return it via `headers`:
+**Static API key**
+Return it via `headers`:
 
 ```python
 class MyProvider(Provider):
@@ -135,7 +139,8 @@ class MyProvider(Provider):
 col = MyOptical(provider=MyProvider(api_key="secret"))
 ```
 
-**Dynamic bearer token** — use `modifier`, a callable that receives and returns the outgoing request:
+**Dynamic bearer token**
+Use `modifier`, a callable that receives and returns the outgoing request:
 
 ```python
 class MyProvider(Provider):
